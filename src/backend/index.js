@@ -73,6 +73,18 @@ const startServer = async () => {
     }
   });
 
+  // Get all pricelist
+  app.get('/api/pricelist', async (req, res) => {
+    try {
+      const [rows] = await db.query('SELECT * FROM pricelist');
+      res.json(rows);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      res.status(500).json({ message: 'Server error' });
+    }
+  });
+
+
   // Get a single product by ID
   app.get('/api/products/:id', async (req, res) => {
     const productId = req.params.id; // Get the product ID from the request parameters

@@ -10,7 +10,7 @@ const inputData = {
       __v: 0,
     },
     {
-      link: 'what-exactly-is-career-coaching',
+      link: 'pricelist',
      
       title: 'product 2',
       summary: 'Here is info about the second product.',
@@ -19,7 +19,7 @@ const inputData = {
       __v: 0,
     },
     {
-      link: 'what-kind-of-coach-do-i-need',
+      link: 'pricelist',
   
       title: 'product 3',
       
@@ -29,7 +29,7 @@ const inputData = {
       __v: 0,
     },
     {
-      link: 'why-do-i-need-a-careers-coach',
+      link: 'pricelist',
      
       title: 'product 4',
       
@@ -39,7 +39,7 @@ const inputData = {
       __v: 1,
     },
     {
-      link: 'how-to-choose-a-career-path',
+      link: 'pricelist',
       
       title: 'product 5',
       
@@ -49,7 +49,7 @@ const inputData = {
       __v: 0,
     },
     {
-      link: 'effective-time-management-skills',
+      link: 'pricelist',
       
       title: 'prodcut 6',
       

@@ -8,7 +8,7 @@ import ContentBlock from '../components/ContentBlock';
 import FeaturedBlogPost from '../components/FeaturedBlogPost';
 import BlogPostContainer from '../components/BlogPostContainer';
 import TextHeader from '../components/TextHeader';
-import inputData from '../pagesInput/the-essential-career-blog';
+import inputData from '../pagesInput/pricelist';
 import SEO from '../components/seo';
 
 // Destructuring the blog array from the inputData object.
