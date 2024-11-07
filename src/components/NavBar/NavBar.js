@@ -37,7 +37,7 @@ const NavBar = ({ className }) => (
             </li>
             {/* old name was blog for pricelist */}
             <li className="nav-item">
-              <Link className="nav-link" to="/the-essential-career-blog/">
+              <Link className="nav-link" to="/pricelist/">
                 PriceList
               </Link>
             </li>

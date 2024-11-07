@@ -12,9 +12,7 @@ import { Global, css } from '@emotion/react'
 
 import NavBar from './NavBar/NavBar'
 import Footer from './Footer/Footer'
-import MailChimpSignUp from './MailChimpSignUp'
-import CalendlyWidget from './CalendlyWidget'
-import ContentBlock from './ContentBlock'
+
 
 // Add Fonts
 

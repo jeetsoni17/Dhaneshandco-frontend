@@ -16,9 +16,7 @@ import TextHeader from '../components/TextHeader';
 import TextParagraph from '../components/TextParagraph';
 import ProductCard from '../components/ProductCard';
 import SimpleIcon from '../components/SimpleIcon';
-import CalendlyButton from '../components/CalendlyButton';
 import Stocklist from '../components/Stocklist/Stocklist';
-import StyledCalendlyButton from '../components/CalendlyWidget';
 import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import Fade from 'react-reveal/Fade'; // Import Fade animation

@@ -45,27 +45,27 @@ const Stocklist = () => {
             </a>
           </div>
         </Fade>
-        <Fade bottom>
+        {/* <Fade bottom>
           <div className="grid-item">
             <a href="https://link4.com" target="_blank" rel="noopener noreferrer">
               <img src={stockImage4} alt="Stock Image 4" style={{ width: '100%', height: 'auto' }} />
             </a>
           </div>
-        </Fade>
-        <Fade bottom>
+        </Fade> */}
+        {/* <Fade bottom>
           <div className="grid-item">
             <a href="https://link5.com" target="_blank" rel="noopener noreferrer">
               <img src={stockImage5} alt="Stock Image 5" style={{ width: '100%', height: 'auto' }} />
             </a>
           </div>
-        </Fade>
-        <Fade bottom>
+        </Fade> */}
+        {/* <Fade bottom>
           <div className="grid-item">
             <a href="https://link6.com" target="_blank" rel="noopener noreferrer">
               <img src={stockImage6} alt="Stock Image 6" style={{ width: '100%', height: 'auto' }} />
             </a>
           </div>
-        </Fade>
+        </Fade> */}
       </div>
     </div>
   );
