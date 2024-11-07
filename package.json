@@ -22,6 +22,7 @@
     "@storybook/addons": "^7.6.17",
     "@storybook/preset-create-react-app": "^8.4.2",
     "bootstrap": "^5.0.0-beta2",
+    "composer": "^4.1.0",
     "cors": "^2.8.5",
     "express": "^4.21.1",
     "flowbite": "^2.5.2",
