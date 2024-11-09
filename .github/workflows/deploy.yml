@@ -1,5 +1,8 @@
 name: Deploy Public Contents
 
+permissions:
+  contents: write
+
 on:
   push:
     branches:
@@ -20,10 +23,10 @@ jobs:
       - name: Fetch all branches
         run: git fetch --all
 
-      - name: Checkout public branch
+      - name: Checkout or create public branch
         run: |
-          git checkout public
-          git pull origin public
+          git checkout public || git checkout -b public
+          git pull origin public || echo "Public branch does not exist yet"
 
       - name: Copy contents of public folder from development-changes
         run: git checkout development-changes -- public/*

@@ -7,7 +7,7 @@ const inputData = {
 
   storyTitle1: 'Establish of Dhanesh & Co',
   storyParagraphs1: [
-    ' I’ve always been fascinated by what makes people tick. I was drawn to study Psychology as an undergrad and completed my Masters in Organisational Psychology. Here, I became intrigued by the science of how and why we change and adapt in the workplace.',
+    'I’ve always been fascinated by what makes people tick. I was drawn to study Psychology as an undergrad and completed my Masters in Organisational Psychology. Here, I became intrigued by the science of how and why we change and adapt in the workplace.',
     'I’ve always been fascinated by what makes people tick. I was drawn to study Psychology as an undergrad and completed my Masters in Organisational Psychology. Here, I became intrigued by the science of how and why we change and adapt in the workplace.',
   ],
   
