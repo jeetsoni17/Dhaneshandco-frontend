@@ -1,37 +1,42 @@
-name: Deploy
+name: Deploy Public Contents
+
 on:
   push:
     branches:
-      - main
+      - development-changes
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Use Node.js 12
-        uses: actions/setup-node@v1
-        with:
-          node-version: 12.x
-      - name: Cache node modules
-        uses: actions/cache@v1
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-node-
-      - name: Build
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup Git
         run: |
-          npm ci
-          npm run build
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.PROD_AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.PROD_AWS_SECRET_ACCESS_KEY }}
-          aws-region: eu-west-2
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
 
-      - name: Deploy
-        run: aws s3 sync ./public s3://${{ secrets.PROD_AWS_S3_BUCKET_NAME }} --size-only --exclude ".github/*"
+      - name: Fetch all branches
+        run: git fetch --all
 
-      - name: Invalidate Cloudfront CDN
-        run: aws cloudfront create-invalidation --distribution-id ${{ secrets.PROD_CLOUDFRONT_DISTRIBUTION_ID }} --paths '/*'
+      - name: Checkout public branch
+        run: |
+          git checkout public
+          git pull origin public
+
+      - name: Copy contents of public folder from development-changes
+        run: git checkout development-changes -- public/*
+
+      - name: Check for changes
+        run: |
+          if git diff --quiet; then
+            echo "No changes detected in public folder. Skipping commit."
+            exit 0
+          fi
+
+      - name: Commit and push changes
+        run: |
+          git add .
+          git commit -m "Auto-update files from inside the public folder"
+          git push origin public
