@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkdhanesh_and_company=self.webpackChunkdhanesh_and_company||[]).push([[125],{3331:function(n,e,o){o.r(e);o(6540);var a=o(4794),u=o(7437);e.default=()=>(0,u.Y)("div",null,(0,u.Y)("h1",null,"Page Not Found"),(0,u.Y)("p",null,"The page you are looking for does not exist."),(0,u.Y)(a.Link,{to:"/"},"Go back to Home"))}}]);
+//# sourceMappingURL=component---src-pages-404-js-958d3b747ab98c3b82dc.js.map
