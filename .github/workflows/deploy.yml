@@ -29,24 +29,24 @@ jobs:
           git checkout public || git checkout -b public
           git pull origin public || echo "Public branch does not exist or pull failed"
 
-      - name: Copy contents of public folder from development-changes
+      - name: Copy contents of public folder to root
         run: |
           set -eux
-          git checkout development-changes -- public/*
+          cp -R public/* .
 
       - name: Check for changes
         run: |
           set -eux
           git status
           if git diff --quiet; then
-            echo "No changes detected in public folder. Skipping commit."
+            echo "No changes detected. Skipping commit."
             exit 0
           fi
 
       - name: Commit and push changes
-        if: success()  # Only run if previous steps succeeded
+        if: success()
         run: |
           set -eux
           git add .
-          git commit -m "Auto-update files from inside the public folder" || echo "Nothing to commit"
-          git push origin public || echo "No changes to push"
+          git commit -m "Auto-update files from inside the public folder"
+          git push origin public
