@@ -27,7 +27,9 @@ jobs:
         run: |
           set -eux
           git checkout public || git checkout -b public
-          git pull origin public || echo "Public branch does not exist or pull failed"
+
+      - name: Rebase public branch with the remote
+        run: git pull --rebase origin public
 
       - name: Copy contents of public folder to root
         run: |
@@ -44,9 +46,8 @@ jobs:
           fi
 
       - name: Commit and push changes
-        if: success()
         run: |
           set -eux
           git add .
           git commit -m "Auto-update files from inside the public folder"
-          git push origin public
+          git push origin public --force-with-lease
