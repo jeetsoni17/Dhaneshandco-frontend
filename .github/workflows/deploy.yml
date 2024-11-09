@@ -25,14 +25,19 @@ jobs:
 
       - name: Checkout or create public branch
         run: |
+          set -x  # Enable debug mode
           git checkout public || git checkout -b public
-          git pull origin public || echo "Public branch does not exist yet"
+          git pull origin public || echo "Public branch does not exist or pull failed"
 
       - name: Copy contents of public folder from development-changes
-        run: git checkout development-changes -- public/*
+        run: |
+          set -x
+          git checkout development-changes -- public/*
 
       - name: Check for changes
         run: |
+          set -x
+          git status
           if git diff --quiet; then
             echo "No changes detected in public folder. Skipping commit."
             exit 0
@@ -40,6 +45,7 @@ jobs:
 
       - name: Commit and push changes
         run: |
+          set -x
           git add .
           git commit -m "Auto-update files from inside the public folder"
           git push origin public
