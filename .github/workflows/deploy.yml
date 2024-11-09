@@ -17,26 +17,26 @@ jobs:
 
       - name: Setup Git
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
 
       - name: Fetch all branches
         run: git fetch --all
 
       - name: Checkout or create public branch
         run: |
-          set -x  # Enable debug mode
+          set -eux
           git checkout public || git checkout -b public
           git pull origin public || echo "Public branch does not exist or pull failed"
 
       - name: Copy contents of public folder from development-changes
         run: |
-          set -x
+          set -eux
           git checkout development-changes -- public/*
 
       - name: Check for changes
         run: |
-          set -x
+          set -eux
           git status
           if git diff --quiet; then
             echo "No changes detected in public folder. Skipping commit."
@@ -44,8 +44,9 @@ jobs:
           fi
 
       - name: Commit and push changes
+        if: success()  # Only run if previous steps succeeded
         run: |
-          set -x
+          set -eux
           git add .
-          git commit -m "Auto-update files from inside the public folder"
-          git push origin public
+          git commit -m "Auto-update files from inside the public folder" || echo "Nothing to commit"
+          git push origin public || echo "No changes to push"
