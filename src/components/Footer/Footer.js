@@ -14,18 +14,17 @@ const Footer = ({ className }) => (
   <div className="col-md-6 px-4">
     <h5>Dhanesh & Co in Andheri East, Mumbai</h5>
     <p style={{ fontSize: '14px' }}>
-      Whether you are planning to buy a new television or an AC, Electrical Goods Dealers can assist you with every need.
-      They are the experts in suggesting the right electrical gadgets and even can assist in installation and repair.
-      Their experience and vast network in the market help you get the right products within your budget.
-      So whether you're looking to upgrade your home appliances or need new switchgear, it is best to approach the dealers in Mumbai.<br />
-      Dhanesh & Co is the right place to buy electrical goods in Andheri East Mumbai.
+    Dhanesh and Co takes pride in being a premier authorized dealer and stockist for Larsen & Toubro Ltd., delivering excellence and reliability.
+     We actively collaborate with projects right from their conceptualization stage, enabling us to design and provide energy-efficient solutions tailored to the specific needs of each project. 
+     Our commitment is to support and enhance the sustainability and performance of every venture we undertake, making us a trusted partner in achieving innovative energy goals.<br />
+     Dhanesh & Co is your trusted partner in Andheri East, Mumbai, for innovative and energy-efficient solutions tailored to your project's needs.
     </p>
   </div>
 
   <div className="col-md-3 d-flex flex-column align-items-center">
     <h5>Quick Links</h5>
     <ul className="list-unstyled text-center" style={{ fontSize: '14px' }}>
-      <li className="mb-2"><a href="#" className="text-dark">Home</a></li>
+      <li className="mb-2"><a href="" className="text-dark">Home</a></li>
       <li className="mb-2"><a href="#" className="text-dark">About Us</a></li>
       <li className="mb-2"><a href="#" className="text-dark">Pricelist</a></li>
       <li className="mb-2"><a href="#" className="text-dark">Contact</a></li>
@@ -52,12 +51,12 @@ const Footer = ({ className }) => (
   </div>
   <div className="col-lg-3 col-md-4 col-sm-6 col-12">
     <TextAnchor href="mailto:dhanesh@gmail.com?subject=Dhanesh and Company Enquiry">
-      <i className={['icon-envelope', 'me-2'].join(' ')} /> dhanesh@gmail.com
+      <i className={['icon-envelope', 'me-2'].join(' ')} /> dhanesh_co@gmail.com
     </TextAnchor>
   </div>
   <div className="col-lg-3 col-md-4 col-sm-6 col-12">
     <TextAnchor href="tel:022 - 99999999">
-      <i className={['icon-phone', 'me-2'].join(' ')} />022 - 99999999
+      <i className={['icon-phone', 'me-2'].join(' ')} />022 - 26873598
     </TextAnchor>
   </div>
 </div>

@@ -32,8 +32,8 @@ import { motion } from 'framer-motion';
 // Import images for the carousel
 import bannerImage1 from '../images/hero/banner1.jpg';
 import bannerImage2 from '../images/hero/banner2.jpg'; // Update with actual image paths
-import bannerImage3 from '../images/hero/banner3.jpg';
-import bannerImage4 from '../images/hero/banner4.jpg';
+// import bannerImage3 from '../images/hero/banner3.jpg';
+// import bannerImage4 from '../images/hero/banner4.jpg';  ADD ONE BANNER HERE OF ESBEE 
 
 
 const IndexPage = ({ data }) => {
@@ -61,8 +61,8 @@ const IndexPage = ({ data }) => {
   const banners = [
     { image: bannerImage1 },
     { image: bannerImage2 },
-    { image: bannerImage3 },
-    { image: bannerImage4 },
+    // { image: bannerImage3 },
+    // { image: bannerImage4 },
   ];
 
   return (
