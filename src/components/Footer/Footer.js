@@ -50,8 +50,8 @@ const Footer = ({ className }) => (
     </address>
   </div>
   <div className="col-lg-3 col-md-4 col-sm-6 col-12">
-    <TextAnchor href="mailto:dhanesh@gmail.com?subject=Dhanesh and Company Enquiry">
-      <i className={['icon-envelope', 'me-2'].join(' ')} /> dhanesh_co@gmail.com
+    <TextAnchor href="mailto:dhanesh_co@yahoo.co.in?subject=Dhanesh and Company Enquiry">
+      <i className={['icon-envelope', 'me-2'].join(' ')} /> dhanesh_co@yahoo.co.in
     </TextAnchor>
   </div>
   <div className="col-lg-3 col-md-4 col-sm-6 col-12">

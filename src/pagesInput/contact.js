@@ -5,8 +5,8 @@ const inputData = {
     {
       icon: 'icon-envelope',
       header: 'Email',
-      text: 'dhanesh_co@gmail.com',
-      href: 'mailto:dhanesh@gmail.com?subject=Product enquiry',
+      text: 'dhanesh_co@yahoo.co.in',
+      href: 'mailto:dhanesh@yahoo.co.in?subject=Product enquiry',
     },
     {
       icon: 'icon-phone',
