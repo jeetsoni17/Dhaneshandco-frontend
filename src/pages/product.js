@@ -31,10 +31,12 @@ const ShoppingPage = ({ className }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const categoriesResponse = await fetch('http://localhost:5000/api/categories');
-        const productsResponse = await fetch('http://localhost:5000/api/products');
+        // Use the hosted API URL for production
+        const categoriesResponse = await fetch('http://100.115.154.61:5000/api/categories'); 
+        const productsResponse = await fetch('http://100.115.154.61:5000/api/products');
         
         if (!categoriesResponse.ok || !productsResponse.ok) {
+          console.log(categoriesResponse);
           throw new Error('Error fetching data');
         }
 
@@ -61,7 +63,8 @@ const ShoppingPage = ({ className }) => {
     if (!searchTerm) return;
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:5000/api/products?search=${searchTerm}`);
+      // Use the production API URL for search
+      const response = await fetch(`http://100.115.154.61:5000/api/products?search=${searchTerm}`);
       if (!response.ok) throw new Error('Error fetching search results');
 
       const searchResults = await response.json();
@@ -125,7 +128,7 @@ const ShoppingPage = ({ className }) => {
                     <CardMedia
                       component="img"
                       height="140"
-                      image={`http://localhost:5000/images/${product.product_image}`}
+                      image={`../images/product/${product.product_image}`} // Updated to use production URL
                       alt="Product"
                     />
                     <CardContent>

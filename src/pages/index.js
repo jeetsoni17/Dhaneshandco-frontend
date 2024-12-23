@@ -92,8 +92,8 @@ const IndexPage = ({ data }) => {
         </Fade>
       </ContentBlock>
 
-      {/* New Products Section with Animation */}
-      <ContentBlock>
+      {/* New Products Section with Animation  THIS IS FEATURED PRODUCT */} 
+      {/* <ContentBlock>
       <TextHeader size="large" mainHeader={blogSectionTitle} />
   <TriSection noCards={4} xtraWide>
     {productArray.slice(0, 8).map((product, index) => (
@@ -110,7 +110,7 @@ const IndexPage = ({ data }) => {
       </motion.div>
     ))}
   </TriSection>
-      </ContentBlock>
+      </ContentBlock> */}
     </Layout>
   );
 };

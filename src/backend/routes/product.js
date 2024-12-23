@@ -3,7 +3,7 @@ const router = express.Router();
 const db = require('../config/db'); // Import the database connection
 
 // GET route for fetching all products
-router.get('/', async (req, res) => {
+router.get('/products', async (req, res) => {
   try {
     const [rows] = await db.promise().query('SELECT * FROM products'); // Query to select all products
     res.json(rows); // Send the fetched products as JSON
@@ -14,10 +14,10 @@ router.get('/', async (req, res) => {
 });
 
 // GET route for fetching a single product by ID
-app.get('/api/products/:id', async (req, res) => {
+router.get('/products/:id', async (req, res) => {
   const productId = req.params.id; // Get the product ID from the request parameters
   try {
-    const [rows] = await db.query('SELECT * FROM products WHERE product_id = ?', [productId]); // Fetch the product by ID
+    const [rows] = await db.promise().query('SELECT * FROM products WHERE product_id = ?', [productId]); // Fetch the product by ID
     if (rows.length === 0) {
       return res.status(404).json({ message: 'Product not found' }); // Handle case where product is not found
     }
@@ -28,12 +28,10 @@ app.get('/api/products/:id', async (req, res) => {
   }
 });
 
-// Example routes for categories and subcategories
-
-// Get all categories
+// GET route for fetching all categories
 router.get('/categories', async (req, res) => {
   try {
-    const [rows] = await db.promise().query('SELECT * FROM categories');
+    const [rows] = await db.promise().query('SELECT * FROM categories'); // Fetch categories
     res.json(rows);
   } catch (error) {
     console.error('Error fetching categories:', error);
@@ -41,10 +39,10 @@ router.get('/categories', async (req, res) => {
   }
 });
 
-// Get all subcategories
+// GET route for fetching all subcategories
 router.get('/subcategories', async (req, res) => {
   try {
-    const [rows] = await db.promise().query('SELECT * FROM subcategories');
+    const [rows] = await db.promise().query('SELECT * FROM subcategories'); // Fetch subcategories
     res.json(rows);
   } catch (error) {
     console.error('Error fetching subcategories:', error);
@@ -52,10 +50,10 @@ router.get('/subcategories', async (req, res) => {
   }
 });
 
-// Get all sub_subcategories
+// GET route for fetching all sub-subcategories
 router.get('/sub_subcategories', async (req, res) => {
   try {
-    const [rows] = await db.promise().query('SELECT * FROM sub_subcategories');
+    const [rows] = await db.promise().query('SELECT * FROM sub_subcategories'); // Fetch sub-subcategories
     res.json(rows);
   } catch (error) {
     console.error('Error fetching sub_subcategories:', error);

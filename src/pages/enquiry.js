@@ -18,13 +18,14 @@ const ContactPage = ({ className }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    emailjs.sendForm('service_6kyxjo4', 'template_sbso5nh', form.current, 'ZZ6ICXjrCVsBkL7FE')
-      .then((response) => {
+    emailjs
+      .sendForm('service_6kyxjo4', 'template_sbso5nh', form.current, 'ZZ6ICXjrCVsBkL7FE')
+      .then(() => {
         setSuccessMessage('Your enquiry has been sent successfully!');
         setErrorMessage('');
         e.target.reset();
       })
-      .catch((err) => {
+      .catch(() => {
         setErrorMessage('Failed to send your enquiry. Please try again later.');
         setSuccessMessage('');
       });
@@ -37,46 +38,49 @@ const ContactPage = ({ className }) => {
         <TextHeader mainHeader="Submit Your Enquiry" />
         {successMessage && <Message success>{successMessage}</Message>}
         {errorMessage && <Message error>{errorMessage}</Message>}
-        
+
         <form ref={form} onSubmit={handleSubmit}>
           <ColumnsWrapper>
-            <Column>
-              <FormField>
-                <label htmlFor="companyName">Company Name</label>
-                <Input type="text" id="companyName" name="company_name" required />
-              </FormField>
-              
-              <FormField>
-                <label htmlFor="email">Email</label>
-                <Input type="email" id="email" name="user_email" required />
-              </FormField>
-              
-              <FormField>
-                <label htmlFor="address">Address</label>
-                <Textarea id="address" name="address" rows="2" required />
-              </FormField>
-            </Column>
-            
-            <Column>
-              <FormField>
-                <label htmlFor="name">Your Name</label>
-                <Input type="text" id="name" name="user_name" required />
-              </FormField>
+            {/* Company Name */}
+            <FormField>
+              <label htmlFor="companyName">Company Name</label>
+              <Input type="text" id="companyName" name="company_name" required tabIndex="1" />
+            </FormField>
 
-              <FormField>
-                <label htmlFor="phoneNumber">Phone Number</label>
-                <Input type="number" id="phoneNumber" name="phone_number" required />
-              </FormField>
-              
-              <FormField>
-                <label htmlFor="enquiry">Enquiry</label>
-                <Textarea id="enquiry" name="message" rows="2" required />
-              </FormField>
-            </Column>
+            {/* Your Name */}
+            <FormField>
+              <label htmlFor="name">Your Name</label>
+              <Input type="text" id="name" name="user_name" required tabIndex="2" />
+            </FormField>
+
+            {/* Email */}
+            <FormField>
+              <label htmlFor="email">Email</label>
+              <Input type="email" id="email" name="user_email" required tabIndex="3" />
+            </FormField>
+
+            {/* Phone Number */}
+            <FormField>
+              <label htmlFor="phoneNumber">Phone Number</label>
+              <Input type="number" id="phoneNumber" name="phone_number" required tabIndex="4" />
+            </FormField>
+
+            {/* Address */}
+            <FormField>
+              <label htmlFor="address">Address</label>
+              <Textarea id="address" name="address" rows="2" required tabIndex="5" />
+            </FormField>
+
+            {/* Enquiry */}
+            <FormField>
+              <label htmlFor="enquiry">Enquiry</label>
+              <Textarea id="enquiry" name="message" rows="2" required tabIndex="6" />
+            </FormField>
           </ColumnsWrapper>
 
-          {/* Use the Button component here */}
-          <Button type="submit">Submit</Button>
+          <ButtonWrapper>
+            <Button type="submit" tabIndex="7">Submit</Button>
+          </ButtonWrapper>
         </form>
       </FormWrapper>
     </Layout>
@@ -92,61 +96,57 @@ const FormWrapper = styled.div`
 
 const ColumnsWrapper = styled.div`
   display: flex;
-  gap: 4rem;
-  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1.5rem;
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 1rem;
+    flex-direction: column; /* Switches to vertical stack on smaller screens */
   }
 `;
 
-const Column = styled.div`
-  flex: 1;
-`;
-
 const FormField = styled.div`
-  margin-bottom: 1.5rem;
-  
+  flex: 1 1 calc(50% - 1rem); /* Default: two-column layout */
+  min-width: 280px;
+
+  @media (max-width: 768px) {
+    flex: 1 1 100%; /* Full width for each field on smaller screens */
+  }
+
   label {
     display: block;
     font-size: 1rem;
     font-weight: 600;
-    color: #333;
     margin-bottom: 0.5rem;
   }
-`;
 
-const Input = styled.input`
-  width: 100%;
-  padding: 0.75rem 0;
-  font-size: 1rem;
-  background: none;
-  border: none;
-  border-bottom: 1px solid #ccc;
-  outline: none;
-  transition: border-color 0.2s ease;
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.75rem 0;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    transition: border-color 0.2s ease;
 
-  &:focus {
-    border-bottom-color: #007bff;
+    &:focus {
+      border-bottom-color: #007bff;
+    }
+  }
+
+  textarea {
+    resize: vertical;
   }
 `;
 
-const Textarea = styled.textarea`
-  width: 100%;
-  padding: 0.75rem 0;
-  font-size: 1rem;
-  background: none;
-  border: none;
-  border-bottom: 1px solid #ccc;
-  outline: none;
-  transition: border-color 0.2s ease;
+const Input = styled.input``;
 
-  &:focus {
-    border-bottom-color: #007bff;
-  }
+const Textarea = styled.textarea``;
 
-  resize: vertical;
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
 `;
 
 const Message = styled.div`

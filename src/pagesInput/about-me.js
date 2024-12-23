@@ -7,8 +7,8 @@ const inputData = {
 
   storyTitle1: 'Establish of Dhanesh & Co',
   storyParagraphs1: [
-    'Dhanesh & Co was founded with a mission to redefine the standards of energy-efficient solutions in the industry. From the very beginning, our focus has been on delivering quality, innovation, and reliability to every project we undertake. As an authorized dealer and stockist of Larsen & Toubro Ltd., we quickly established ourselves as a trusted name, known for providing cutting-edge solutions tailored to meet the unique demands of our clients. Located in the vibrant heart of Andheri East, Mumbai, we take pride in being a part of projects that drive progress and innovation across industries.',
-    'Over the years, our journey has been marked by growth, trust, and an unwavering commitment to excellence. We have built long-lasting relationships with our clients by consistently going above and beyond to provide sustainable energy solutions that stand the test of time. Whether working on large-scale infrastructure projects or supporting local ventures, Dhanesh & Co continues to be a reliable partner, driven by a passion for helping our clients achieve their goals through innovative energy practices. Our establishment is not just a story of business success but a testament to the impact of dedication, vision, and hard work.',
+    'Dhanesh & Co was founded to provide energy-efficient solutions focused on quality, innovation, and reliability. As an authorized dealer of Larsen & Toubro Ltd., we quickly became a trusted name, offering tailored solutions to meet our clients needs. Based in Andheri East, Mumbai, we take pride in contributing to projects that drive progress across industries.',
+    'Over the years, we have built strong relationships with clients through our commitment to excellence and sustainable energy practices. Whether supporting large infrastructure projects or local ventures, Dhanesh & Co continues to be a reliable partner, driven by a passion for helping clients achieve their goals.',
   ],
   
   iconListItemTitle1: 'Learning...',

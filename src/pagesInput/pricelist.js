@@ -1,64 +1,31 @@
 const inputData = {
   blogArray: [
     {
-      link: '/images/blog/trial.pdf',
-      
-      title: 'Future Proof Your Skills!',
-      summary: 'Here is info about the first product.',
+      link: '/images/blog/exora_pricelist.pdf', // Updated link for the PDF
+      title: 'Exora Pricelist',
+      summary: '01 May 2024',
       body_delta: '',
       image_filename: 'trial1',
       __v: 0,
     },
     {
-      link: '/images/blog/trial.pdf',
-     
-      title: 'What exactly is career coaching?',
-      summary: 'Here is info about the second product.',
+      link: '/images/blog/panel_accessories.pdf', // Updated link for the PDF
+      title: 'Panel Accessories',
+      summary: '01 May 2024',
       body_delta: '',
       image_filename: 'trial1',
       __v: 0,
     },
     {
-      link: 'what-kind-of-coach-do-i-need',
-  
-      title: 'What kind of coach do I need?',
-      
-      summary: 'Here is info about the third product.',
+      link: '/images/blog/esp_pricelist.pdf', // Updated link for the PDF
+      title: 'ESP Pricelist',
+      summary: '01 May 2024',
       body_delta: '',
       image_filename: 'trial1',
       __v: 0,
     },
-    {
-      link: 'why-do-i-need-a-careers-coach',
-     
-      title: 'Why do I need a careers coach?',
-      
-      summary: 'Here is info about the fourth product.',
-      body_delta: '',
-      image_filename: 'trial1',
-      __v: 0,
-    },
-    {
-      link: 'how-to-choose-a-career-path',
-      
-      title: 'How to choose a career path?',
-      
-      summary: 'Here is info about the fifth product.',
-      body_delta: '',
-      image_filename: 'trial1',
-      __v: 0,
-    },
-    {
-      link: 'effective-time-management-skills',
-      
-      title: 'prodcut 6',
-      
-      summary: 'Here is info about the sixth product.',
-      body_delta: '',
-      image_filename: 'trial1',
-      __v: 0,
-    },
+    // Additional items can be added here in similar format
   ],
-}
+};
 
-export default inputData
+export default inputData;
