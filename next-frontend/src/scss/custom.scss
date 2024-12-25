@@ -1,0 +1,51 @@
+$theme-colors: (
+  "primary": #a9a9a9,
+  "secondary": #efefef,
+  "info": #caebf2,
+  "highlight": #207BFF,
+  "white": white,
+  "light": #f8f9fa,
+  "dark": #343a40,
+  "gray": #6c757d,
+);
+
+@import "~bootstrap/scss/functions";  // Import functions first
+@import "~bootstrap/scss/_variables";  // Import variables second
+@import "~bootstrap/scss/_mixins";     // Import mixins third
+
+// Step 4: Import Bootstrap components and utilities
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/variables-dark";
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/helpers";
+@import "~bootstrap/scss/utilities/api";
+
+@import "~bootstrap/scss/maps";
+@import "~bootstrap/scss/_utilities"; 
+@import "~bootstrap/scss/_root";
+@import "~bootstrap/scss/_reboot";
+@import "~bootstrap/scss/_type";
+@import "~bootstrap/scss/_containers";
+@import "~bootstrap/scss/_grid"; 
+@import "~bootstrap/scss/_buttons";
+@import "~bootstrap/scss/_nav";
+@import "~bootstrap/scss/_navbar";
+@import "~bootstrap/scss/_carousel";
+
+@import "./themes/_bootstrap_overrides.scss";  // Your overrides file
+
+
+//Import Bootstrap
+
+@import "./vendors/_bootstrap";
+
+// Import Pages SCSS
+
+// Components
+
+@import "./components/_carousel"; // Include custom styling for carousel.
