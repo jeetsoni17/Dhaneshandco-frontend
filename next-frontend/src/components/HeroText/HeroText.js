@@ -27,7 +27,7 @@ const StyledHeroText = styled(HeroText)`
   }
   @media (max-width: 767px) {
      {
-      /* To deal with bootstrap padding and gatsby-background-image (adding extra padding in on hero on mobile) use conditional to remove it */
+      /* To deal with bootstrap padding and background-image (adding extra padding in on hero on mobile) use conditional to remove it */
     }
     padding-left: 0;
     padding-right: 0;

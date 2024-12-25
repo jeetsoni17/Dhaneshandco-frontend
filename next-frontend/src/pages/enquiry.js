@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import TextHeader from '../components/TextHeader';
-import SEO from '../components/seo';
 import emailjs from '@emailjs/browser';
 import Button from '../components/Button/Button';
 
@@ -33,7 +32,10 @@ const ContactPage = ({ className }) => {
 
   return (
     <Layout className={className}>
-      <SEO title="Enquiry" description="Submit your enquiry for electrical goods at Dhanesh & Co." />
+      <Head>
+        <title>Enquiry</title>
+        <meta name="description" content="Submit your enquiry for electrical goods at Dhanesh & Co." ></meta>
+      </Head>
       <FormWrapper>
         <TextHeader mainHeader="Submit Your Enquiry" />
         {successMessage && <Message success>{successMessage}</Message>}

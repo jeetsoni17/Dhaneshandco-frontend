@@ -1,3 +1,9 @@
+// Step 1: Import Bootstrap functions, variables, and mixins
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";  // Import Bootstrap variables after your custom ones
+@import "~bootstrap/scss/mixins";     // Import mixins third
+
+// Step 2: Define your custom theme variables
 $theme-colors: (
   "primary": #a9a9a9,
   "secondary": #efefef,
@@ -9,10 +15,7 @@ $theme-colors: (
   "gray": #6c757d,
 );
 
-// Set the main text colour to be used throughout the site.
-
 $body-color: #6c757d;
-
 $container-max-widths: (
   sm: 540px,
   md: 720px,
@@ -21,17 +24,25 @@ $container-max-widths: (
   xxl: 1160px,
 );
 
-// // scss-docs-start grid-breakpoints
-// $grid-breakpoints: (
-//   xs: 0,
-//   sm: 576px,
-//   md: 768px,
-//   lg: 992px,
-//   xl: 1200px,
-//   xxl: 1400px,
-// ) !default;
-
 $carousel-control-color: black;
+$enable-smooth-scroll: false;  // Set to true if you want smooth scrolling
 
-// $enable-reduced-motion: true;
-$enable-smooth-scroll: false;
+// Step 3: Import the Bootstrap components
+@import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/root";
+@import "~bootstrap/scss/reboot";
+@import "~bootstrap/scss/type";
+@import "~bootstrap/scss/containers";
+@import "~bootstrap/scss/grid"; 
+@import "~bootstrap/scss/buttons";
+@import "~bootstrap/scss/nav";
+@import "~bootstrap/scss/navbar";
+@import "~bootstrap/scss/carousel";
+
+// Customize Carousel controls
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: $carousel-control-color;
+}
+
+// Optionally, other overrides

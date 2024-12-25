@@ -1,21 +1,25 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import PropTypes from 'prop-types'
-import { Link } from 'gatsby'
+import React from "react";
+import styled from "@emotion/styled";
+import PropTypes from "prop-types";
+import Link from "next/link"; // Use Next.js Link component
 
 const TextLink = ({ className, to, text, small }) => (
-  <Link className={[className, 'text-highlight'].join(' ')} to={`/${to}/`}>
+  <Link
+    href={`/${to}`}
+    passHref
+    className={[className, "text-highlight"].join(" ")}
+  >
     {text}
   </Link>
-)
+);
 
 const StyledTextLink = styled(TextLink)`
-  font-size: ${props => (props.small ? '1rem' : '1.25rem')};
+  font-size: ${(props) => (props.small ? "1rem" : "1.25rem")};
   text-decoration: none;
   color: white !important; /* Ensures text remains white */
-`
+`;
 
-export default StyledTextLink
+export default StyledTextLink;
 
 TextLink.propTypes = {
   /**
@@ -23,18 +27,17 @@ TextLink.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Emotion classname
+   * Target route
    */
   to: PropTypes.string,
   /**
-   * Emotion classname
+   * Link text
    */
   text: PropTypes.string,
   /**
-   * Emotion classname
+   * Make text small
    */
   small: PropTypes.bool,
-}
+};
 
-TextLink.defaultProps = {}
-  
+TextLink.defaultProps = {};

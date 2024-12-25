@@ -1,29 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import ContentBlock from '../components/ContentBlock';
 import FeaturedBlogPost from '../components/FeaturedBlogPost';
 import BlogPostContainer from '../components/BlogPostContainer';
 import TextHeader from '../components/TextHeader';
-import SEO from '../components/seo';
+import Head from 'next/head'; 
 
-const PriceList = ({ data }) => {
+const PriceList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [priceListData, setPriceListData] = useState([]);
   const [error, setError] = useState(false); // Track errors
 
-  // Fetching the images from GraphQL query
-  const blogImage1 = data.blogImage1?.childImageSharp?.fluid || null;
-  const blogImage2 = data.blogImage2?.childImageSharp?.fluid || null;
-  const blogImage3 = data.blogImage3?.childImageSharp?.fluid || null;
-  const blogImage4 = data.blogImage4?.childImageSharp?.fluid || null;
-  const blogImage5 = data.blogImage5?.childImageSharp?.fluid || null;
-  const blogImage6 = data.blogImage6?.childImageSharp?.fluid || null;
-
-  const blogImageArray = [blogImage1, blogImage2, blogImage3, blogImage4, blogImage5, blogImage6];
+  // Placeholder images array (replace with actual local images if necessary)
+  const blogImageArray = [
+    '/images/blog/trial1.png',
+    '/images/blog/trial2.png',
+    '/images/blog/trial3.png',
+    '/images/blog/trial4.png',
+    '/images/blog/trial5.png',
+    '/images/blog/trial6.png',
+  ];
 
   useEffect(() => {
     const fetchPriceList = async () => {
@@ -49,11 +47,14 @@ const PriceList = ({ data }) => {
     };
 
     fetchPriceList();
-  }, [blogImageArray]);
+  }, []);
 
   return (
     <Layout>
-      <SEO title="Price List" description="Browse and download our latest price lists" />
+      <Head>
+        <title>Price List</title>
+        <meta name="description" content="Browse and download our latest price lists" />
+      </Head>
 
       <TextHeader mainHeader="Price List" size="Large" />
 
@@ -75,7 +76,7 @@ const PriceList = ({ data }) => {
                   <FeaturedBlogPost
                     pricelistTitle={item.file_name} // Use the file name as title
                     blogInfo={item}
-                    image={item.image || blogImage1} // Fallback to first image if none
+                    image={item.image || blogImageArray[0]} // Fallback to first image if none
                     link={`http://100.115.154.61:5000/download.php?id=${item.id}`} // Construct dynamic download link
                   />
                 </motion.div>
@@ -96,46 +97,24 @@ const PriceList = ({ data }) => {
   );
 };
 
-export default PriceList;
+// Static or Server-side data fetching
+export async function getStaticProps() {
+  // You can add a fallback or fetch the data here if needed
+  // Example static data fetch:
+  // const res = await fetch('http://dhaneshnco.in/api/pricelist');
+  // const priceListData = await res.json();
 
-export const blogImageMainFragment = graphql`
-  fragment blogImageMain on File {
-    childImageSharp {
-      fluid(maxWidth: 400, quality: 100) {
-        ...GatsbyImageSharpFluid
-        ...GatsbyImageSharpFluidLimitPresentationSize
-      }
-    }
-  }
-`;
-
-export const pageQuery = graphql`
-  query {
-    blogImage1: file(relativePath: { eq: "blog/trial1.png" }) {
-      ...blogImageMain
-    }
-    blogImage2: file(relativePath: { eq: "blog/trial2.png" }) {
-      ...blogImageMain
-    }
-    blogImage3: file(relativePath: { eq: "blog/trial3.png" }) {
-      ...blogImageMain
-    }
-    blogImage4: file(relativePath: { eq: "blog/trial4.png" }) {
-      ...blogImageMain
-    }
-    blogImage5: file(relativePath: { eq: "blog/trial5.png" }) {
-      ...blogImageMain
-    }
-    blogImage6: file(relativePath: { eq: "blog/trial6.png" }) {
-      ...blogImageMain
-    }
-  }
-`;
+  return {
+    props: {}, // Pass any required props if needed for static generation
+  };
+}
 
 PriceList.propTypes = {
-  data: PropTypes.object.isRequired,
+  data: PropTypes.object,
 };
 
 PriceList.defaultProps = {
   data: {},
 };
+
+export default PriceList;

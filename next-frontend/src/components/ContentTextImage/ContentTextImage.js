@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import PropTypes from 'prop-types'
-import Img from 'gatsby-image'
 
 const ContentTextImage = ({
   className,
@@ -10,7 +9,8 @@ const ContentTextImage = ({
   imageSide,
   xtraWide,
 }) => {
-  const columns = xtraWide ? 12 : 10
+  const columns = xtraWide ? 12 : 10;
+  
 
   const textOrder =
     imageSide === 'left'
@@ -21,6 +21,7 @@ const ContentTextImage = ({
       ? `col-lg-${columns / 2} order-1 order-lg-1`
       : `col-lg-${columns / 2} order-1 order-lg-2`
 
+      console.log(image);
   return (
     <div className={[className, 'row justify-content-center'].join(' ')}>
       <div
@@ -37,7 +38,7 @@ const ContentTextImage = ({
           imgOrder,
         ].join(' ')}
       >
-        <Img className="rounded-circle w-100 mx-auto" fluid={image} alt="" />
+        <img className="rounded-circle w-100 mx-auto" src={image} alt="" ></img>
       </div>
     </div>
   )

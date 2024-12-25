@@ -1,0 +1,22 @@
+// src/scss/_variables.scss
+$theme-colors: (
+  "primary": #a9a9a9,
+  "secondary": #efefef,
+  "info": #caebf2,
+  "highlight": #207BFF,
+  "white": white,
+  "light": #f8f9fa,
+  "dark": #343a40,
+  "gray": #6c757d,
+);
+
+$theme-colors-rgb: (
+  "primary": rgb(169, 169, 169),
+  "secondary": rgb(239, 239, 239),
+  "info": rgb(202, 235, 242),
+  "highlight": rgb(32, 123, 255),
+  "white": rgb(255, 255, 255),
+  "light": rgb(248, 249, 250),
+  "dark": rgb(52, 58, 64),
+  "gray": rgb(108, 115, 125),
+);

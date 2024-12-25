@@ -1,59 +1,52 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import PropTypes from 'prop-types'
-import BackgroundImage from 'gatsby-background-image'
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "@emotion/styled";
 
 const Banner = ({ children, heroImage, className }) => {
-  const newImageData = heroImage
-  const backgroundFluidImageStack = [
-    newImageData,
-    `linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75))`,
-  ].reverse()
+  const backgroundStyle = {
+    backgroundImage: `
+      linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)),
+      url(${heroImage})
+    `,
+  };
 
   return (
-    <BackgroundImage
-      Tag="section"
-      className={[
-        className,
-        'container-fluid d-flex justify-content-center',
-      ].join(' ')}
-      fluid={backgroundFluidImageStack}
-      loading="eager"
-      fadeIn={false}
+    <section
+      className={[className, "container-fluid d-flex justify-content-center"].join(" ")}
+      style={backgroundStyle}
     >
       {children}
-    </BackgroundImage>
-  )
-}
+    </section>
+  );
+};
 
 const HeroBackground = styled(Banner)`
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   min-height: 100vh;
-  padding: 0 0 0 0;
-`
+  padding: 0;
+`;
 
-export default HeroBackground
+export default HeroBackground;
 
 Banner.propTypes = {
   /**
    * Text to go within the background image
    */
-  children: PropTypes.object,
+  children: PropTypes.node,
   /**
-   * Button contents
+   * URL of the hero image
    */
-  heroImage: PropTypes.object,
+  heroImage: PropTypes.string,
   /**
-   * emotion styling classes
+   * Emotion styling classes
    */
   className: PropTypes.string,
-}
+};
 
 HeroBackground.defaultProps = {
-  children: '',
-  headerText: 'HEADER PLACEHOLDER',
-  heroImage: {},
-  className: '',
-}
+  children: null,
+  heroImage: "",
+  className: "",
+};

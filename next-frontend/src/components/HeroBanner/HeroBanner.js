@@ -1,39 +1,33 @@
-import React from 'react'
-import styled from '@emotion/styled'
-import PropTypes from 'prop-types'
-import BackgroundImage from 'gatsby-background-image'
+import React from "react";
+import PropTypes from "prop-types";
+import styled from "@emotion/styled";
 
-const Banner = ({ children, sources, heroImage, className, overlay }) => {
-  const newImageData = sources
-
-  const backgroundFluidImageStack = !overlay
-    ? newImageData
-    : [
-        newImageData,
-        `linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5))`,
-      ].reverse()
+const Banner = ({ children, sources, className, overlay }) => {
+  const backgroundImageStyle = {
+    backgroundImage: overlay
+      ? `
+        linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5)), 
+        url(${sources[0]})
+      `
+      : `url(${sources[0]})`,
+  };
 
   return (
-    <BackgroundImage
-      Tag="section"
-      className={[
-        className,
-        'container-fluid d-flex justify-content-center',
-      ].join(' ')}
-      fluid={backgroundFluidImageStack}
-      critical
-      fadeIn={false}
+    <section
+      className={[className, "container-fluid d-flex justify-content-center"].join(" ")}
+      style={{
+        ...backgroundImageStyle,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
       {children}
-    </BackgroundImage>
-  )
-}
-
-// align-items-end align-items-sm-center
+    </section>
+  );
+};
 
 const HeroBanner = styled(Banner)`
-  background-repeat: no-repeat;
-  background-size: cover;
   @media (max-width: 767px) {
     min-height: 60vh;
   }
@@ -43,31 +37,31 @@ const HeroBanner = styled(Banner)`
   @media (min-width: 993px) {
     min-height: 60vh;
   }
-`
+`;
 
-export default HeroBanner
+export default HeroBanner;
 
 Banner.propTypes = {
   /**
    * Text to go within the background image
    */
-  children: PropTypes.object,
+  children: PropTypes.node,
   /**
-   * Button contents
+   * Array of background image URLs
    */
-  sources: PropTypes.array,
+  sources: PropTypes.arrayOf(PropTypes.string).isRequired,
   /**
-   * Button contents
-   */
-  heroImage: PropTypes.bool,
-  /**
-   * emotion styling classes
+   * Emotion styling classes
    */
   className: PropTypes.string,
   /**
-   * Text to go within the background image
+   * Boolean to enable or disable the overlay
    */
   overlay: PropTypes.bool,
-}
+};
 
-HeroBanner.defaultProps = {}
+HeroBanner.defaultProps = {
+  children: null,
+  className: "",
+  overlay: false,
+};

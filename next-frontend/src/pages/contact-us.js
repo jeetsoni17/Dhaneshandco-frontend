@@ -1,9 +1,8 @@
 import React from 'react';
-import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import ContentBlockContactPage from '../components/ContentBlockContactPage';
 import TextHeader from '../components/TextHeader';
 import TextParagraph from '../components/TextParagraph';
@@ -11,21 +10,21 @@ import ContentText from '../components/ContentText';
 import TriSection from '../components/TriSection';
 import SimpleIcon from '../components/SimpleIcon';
 import TextAnchor from '../components/TextAnchor';
-import SEO from '../components/seo';
-import inputData from '../pagesInput/contact';
+import inputData from '../pagesInput/contact';  // Assuming this file still exists
 import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Footer from '../components/Footer'; // Import the Footer component
+import Footer from '../components/Footer';
+import Head from 'next/head';
 
-const ContactPage = ({ data, className }) => {
-  const { openParagraph, contactOptionsArray } = inputData;
+const ContactPage = ({ className }) => {
+  const { openParagraph, contactOptionsArray, faqText } = inputData;
 
   return (
     <Layout className={className} contact>
-      <SEO
-        title="Contact Details"
-        description="Contact Dhanesh and company to get enquiry and product details. Email: dhanesh@essentialcoaching.co.uk"
-      />
+      <Head>
+        <title>Contact Details</title>
+        <meta name="description" content="Contact Dhanesh and company to get enquiry and product details." />
+      </Head>
 
       <ContentBlockContactPage className="d-flex align-items-center py-5">
         <ContentText>
@@ -48,11 +47,11 @@ const ContactPage = ({ data, className }) => {
 
         <ContentText>
           <TextHeader mainHeader="Frequently Asked Questions" />
-          <FAQAccordion faqs={inputData.faqText} />
+          <FAQAccordion faqs={faqText} />
         </ContentText>
       </ContentBlockContactPage>
 
-      <Footer /> {/* Add Footer here */}
+      <Footer />
     </Layout>
   );
 };
@@ -63,14 +62,12 @@ const FAQAccordion = ({ faqs }) => {
       {faqs.map((faq, index) => (
         <Accordion 
           key={index} 
-          style={{ marginBottom: '1rem', backgroundColor: 'transparent', boxShadow: 'none' }} // Set background and remove shadow
+          style={{ marginBottom: '1rem', backgroundColor: 'transparent', boxShadow: 'none' }}
         >
           <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls={`panel${index}-content`} id={`panel${index}-header`}>
-            <Typography variant="body1"> {/* Removed fontWeight to keep it normal */}
-              {faq.question}
-            </Typography>
+            <Typography variant="body1">{faq.question}</Typography>
           </AccordionSummary>
-          <AccordionDetails style={{ backgroundColor: 'transparent' }}> {/* Ensure details background is also transparent */}
+          <AccordionDetails style={{ backgroundColor: 'transparent' }}>
             <Typography variant="body2" color="textSecondary">
               {faq.answer}
             </Typography>
@@ -95,13 +92,19 @@ const StyledContactPage = styled(ContactPage)`
   .content {
     padding: 20px;
     border-radius: 8px;
-    /* Removed background color and shadow for seamless integration */
   }
 `;
 
 export default StyledContactPage;
 
 ContactPage.propTypes = {
-  data: PropTypes.object,
   className: PropTypes.string,
 };
+
+// Static props if needed in the future
+// export async function getStaticProps() {
+//   // Fetch data or provide static data if necessary
+//   return {
+//     props: {},
+//   };
+// }

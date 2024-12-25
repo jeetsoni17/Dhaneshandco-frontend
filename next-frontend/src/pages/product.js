@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import Layout from '../components/layout';
+import Layout from '../components/Layout';
 import TextHeader from '../components/TextHeader';
 import { useRouter } from 'next/router'; // For routing
 import { TextField, Accordion, AccordionSummary, AccordionDetails, Typography, Card, CardMedia, CardContent, CircularProgress, Button } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-const ShoppingPage = ({ categories, products }) => {
+const Products = ({ categories, products }) => {
   const [filteredProducts, setFilteredProducts] = useState(products);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -82,7 +82,7 @@ const ShoppingPage = ({ categories, products }) => {
                   <CardMedia
                     component="img"
                     height="140"
-                    image={`../images/product/${product.product_image}`} // Ensure correct image path for production
+                    image={`../images/product/${product.image}`} // Ensure correct image path for production
                     alt="Product"
                   />
                   <CardContent>
@@ -101,8 +101,8 @@ const ShoppingPage = ({ categories, products }) => {
 
 export async function getServerSideProps() {
   try {
-    const categoriesResponse = await fetch('http://100.115.154.61:5000/api/categories');
-    const productsResponse = await fetch('http://100.115.154.61:5000/api/products');
+    const categoriesResponse = await fetch('http://localhost:5000/backend/index.php');
+    const productsResponse = await fetch('http://localhost:5000/backend/index.php');
 
     if (!categoriesResponse.ok || !productsResponse.ok) {
       throw new Error('Error fetching data');
@@ -155,9 +155,9 @@ const ProductList = styled.div`
   gap: 1.5rem;
 `;
 
-ShoppingPage.propTypes = {
+Products.propTypes = {
   categories: PropTypes.array.isRequired,
   products: PropTypes.array.isRequired,
 };
 
-export default ShoppingPage;
+export default Products;
