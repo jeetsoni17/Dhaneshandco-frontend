@@ -5,6 +5,7 @@ import Layout from '../components/Layout';
 import TextHeader from '../components/TextHeader';
 import emailjs from '@emailjs/browser';
 import Button from '../components/Button/Button';
+import Head from 'next/head'; // Import Next.js Head component
 
 const ContactPage = ({ className }) => {
   const form = useRef();
@@ -34,7 +35,7 @@ const ContactPage = ({ className }) => {
     <Layout className={className}>
       <Head>
         <title>Enquiry</title>
-        <meta name="description" content="Submit your enquiry for electrical goods at Dhanesh & Co." ></meta>
+        <meta name="description" content="Submit your enquiry for electrical goods at Dhanesh & Co." />
       </Head>
       <FormWrapper>
         <TextHeader mainHeader="Submit Your Enquiry" />
