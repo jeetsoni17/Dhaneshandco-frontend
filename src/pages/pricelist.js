@@ -26,7 +26,7 @@ const PriceList = () => {
   useEffect(() => {
     const fetchPriceList = async () => {
       try {
-        const API_URL = 'http://dhaneshnco.in/api/pricelist';
+        const API_URL = 'https://slategray-louse-109965.hostingersite.com/routes/index.php?endpoint=pricelist';
         const response = await fetch(API_URL);
         if (!response.ok) throw new Error(`Failed to fetch price list data. Status: ${response.status}`);
         const data = await response.json();
@@ -76,8 +76,8 @@ const PriceList = () => {
                   <FeaturedBlogPost
                     pricelistTitle={item.file_name} // Use the file name as title
                     blogInfo={item}
-                    image={item.image || blogImageArray[0]} // Fallback to first image if none
-                    link={`http://100.115.154.61:5000/download.php?id=${item.id}`} // Construct dynamic download link
+                    image={`https://slategray-louse-109965.hostingersite.com/public${item.image}` || blogImageArray[0]} // Fallback to first image if none
+                    link={`https://slategray-louse-109965.hostingersite.com/download.php?id=${item.id}`} // Construct dynamic download link
                   />
                 </motion.div>
               ))}

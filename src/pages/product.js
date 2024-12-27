@@ -82,12 +82,12 @@ const Products = ({ categories, products }) => {
                   <CardMedia
                     component="img"
                     height="140"
-                    image={`../images/product/${product.image}`} // Ensure correct image path for production
+                    image={`https://slategray-louse-109965.hostingersite.com/public/images/product/${product.product_image}`} // Ensure correct image path for production
                     alt="Product"
                   />
                   <CardContent>
-                    <Typography variant="h6">{product.name}</Typography>
-                    <Typography variant="body2" color="textSecondary">{product.description}</Typography>
+                    <Typography variant="h6">{product.product_name}</Typography>
+                    <Typography variant="body2" color="textSecondary">{product.product_description}</Typography>
                   </CardContent>
                 </Card>
               </div>
@@ -101,8 +101,8 @@ const Products = ({ categories, products }) => {
 
 export async function getServerSideProps() {
   try {
-    const categoriesResponse = await fetch('http://localhost:5000/backend/index.php');
-    const productsResponse = await fetch('http://localhost:5000/backend/index.php');
+    const categoriesResponse = await fetch('https://slategray-louse-109965.hostingersite.com/routes/index.php?endpoint=categories');
+    const productsResponse = await fetch('https://slategray-louse-109965.hostingersite.com/routes/index.php?endpoint=products');
 
     if (!categoriesResponse.ok || !productsResponse.ok) {
       throw new Error('Error fetching data');
