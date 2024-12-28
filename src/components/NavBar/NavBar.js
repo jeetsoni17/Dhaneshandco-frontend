@@ -50,7 +50,7 @@ const NavBar = ({ className }) => (
             </li>
             <li className="nav-item">
               <Link href="/pricelist" passHref className="nav-link">
-                PriceList
+                Price List
               </Link>
             </li>
             <li className="nav-item">
@@ -60,7 +60,7 @@ const NavBar = ({ className }) => (
             </li>
             <li className="nav-item">
               <Link href="/contact-us" passHref className="nav-link">
-                Contact US
+                Contact Us
               </Link>
             </li>
           </ul>

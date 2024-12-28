@@ -26,7 +26,7 @@ const ContactPage = ({ className }) => {
         <meta name="description" content="Contact Dhanesh and company to get enquiry and product details." />
       </Head>
 
-      <ContentBlockContactPage className="d-flex align-items-center py-5">
+      <ContentBlockContactPage className="d-flex align-items-center py-0">
         <ContentText>
           <TextHeader mainHeader="Let's Connect..." />
           <TextParagraph paragraphs={openParagraph} />

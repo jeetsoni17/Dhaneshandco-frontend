@@ -49,26 +49,22 @@ const IndexPage = ({ data }) => {
 
       {/* Authorized Stocklist Section */}
       <ContentBlock>
+      
         <Stocklist />
+
       </ContentBlock>
 
       {/* About Us Section with Animation */}
       <ContentBlock color>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.2 }}
-        >
           <TextHeader mainHeader="About Us" />
           <ContentTextImage
             image={trial1.src}
             paragraphs={aboutMeParagraphArray}
-            xtraWide
+            
           >
             <TextParagraph paragraphs={aboutMeParagraphArray} />
             <MainButton label="Read more" primary href="/about-us/" />
           </ContentTextImage>
-        </motion.div>
       </ContentBlock>
 
       {/* Featured Products Section */}
