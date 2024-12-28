@@ -6,6 +6,9 @@ import TextHeader from '../components/TextHeader';
 import { useRouter } from 'next/router'; // For routing
 import { TextField, Accordion, AccordionSummary, AccordionDetails, Typography, Card, CardMedia, CardContent, CircularProgress, Button } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ContentBlock from '../components/ContentBlock';
+import ContentText from '../components/ContentText';
+import Head from 'next/head'; 
 
 const Products = ({ categories, products }) => {
   const [filteredProducts, setFilteredProducts] = useState(products);
@@ -41,7 +44,18 @@ const Products = ({ categories, products }) => {
 
   return (
     <Layout>
-      <PageWrapper>
+      <Head>
+        <title>Products</title>
+        <meta name="description" content="Browse and download our latest price lists" />
+      </Head>
+
+
+      <ContentBlock className="d-flex align-items-center pt-1">
+      <ContentText>
+          <TextHeader mainHeader="Available Products"/>
+      </ContentText>
+
+      <PageWrapper className="pt-0">
         <Sidebar>
           <SearchBar>
             <TextField
@@ -74,7 +88,7 @@ const Products = ({ categories, products }) => {
           </DropdownContainer>
         </Sidebar>
         <ProductSection>
-          <TextHeader mainHeader="Available Products" />
+          <TextHeader/>
           <ProductList>
             {filteredProducts.map((product) => (
               <div key={product.product_id}>
@@ -95,6 +109,7 @@ const Products = ({ categories, products }) => {
           </ProductList>
         </ProductSection>
       </PageWrapper>
+      </ContentBlock>
     </Layout>
   );
 };

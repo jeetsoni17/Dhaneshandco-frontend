@@ -34,7 +34,7 @@ const ContentTextImage = ({
       </div>
       <div
         className={[
-          `col-10 d-lg-flex align-items-center mb-3 mb-lg-0 `,
+          `col-9 d-lg-flex align-items-center mb-3 mb-lg-0 `,
           imgOrder,
         ].join(' ')}
       >

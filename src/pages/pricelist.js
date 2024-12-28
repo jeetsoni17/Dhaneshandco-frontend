@@ -6,22 +6,13 @@ import ContentBlock from '../components/ContentBlock';
 import FeaturedBlogPost from '../components/FeaturedBlogPost';
 import BlogPostContainer from '../components/BlogPostContainer';
 import TextHeader from '../components/TextHeader';
+import ContentText from '../components/ContentText';
 import Head from 'next/head'; 
 
 const PriceList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [priceListData, setPriceListData] = useState([]);
   const [error, setError] = useState(false); // Track errors
-
-  // Placeholder images array (replace with actual local images if necessary)
-  const blogImageArray = [
-    '/images/blog/trial1.png',
-    '/images/blog/trial2.png',
-    '/images/blog/trial3.png',
-    '/images/blog/trial4.png',
-    '/images/blog/trial5.png',
-    '/images/blog/trial6.png',
-  ];
 
   useEffect(() => {
     const fetchPriceList = async () => {
@@ -30,14 +21,8 @@ const PriceList = () => {
         const response = await fetch(API_URL);
         if (!response.ok) throw new Error(`Failed to fetch price list data. Status: ${response.status}`);
         const data = await response.json();
+        setPriceListData(data);
 
-        // Add logic to map local images for matching filenames
-        const enrichedData = data.map((item, index) => ({
-          ...item,
-          image: blogImageArray[index % blogImageArray.length], // Cycle through local images
-        }));
-
-        setPriceListData(enrichedData);
       } catch (error) {
         console.error('Error fetching price list:', error);
         setError(true);
@@ -56,7 +41,11 @@ const PriceList = () => {
         <meta name="description" content="Browse and download our latest price lists" />
       </Head>
 
-      <TextHeader mainHeader="Price List" size="Large" />
+
+      <ContentBlock className="d-flex align-items-center py-0">
+      <ContentText className="py-0">
+          <TextHeader mainHeader="Price List"/>
+      </ContentText>
 
       {!isLoading ? (
         error ? (
@@ -76,7 +65,7 @@ const PriceList = () => {
                   <FeaturedBlogPost
                     pricelistTitle={item.file_name} // Use the file name as title
                     blogInfo={item}
-                    image={`https://slategray-louse-109965.hostingersite.com/public${item.image}` || blogImageArray[0]} // Fallback to first image if none
+                    image={`https://slategray-louse-109965.hostingersite.com/public/images/pdfs/${item.image_path}` || blogImageArray[0]} // Fallback to first image if none
                     link={`https://slategray-louse-109965.hostingersite.com/download.php?id=${item.id}`} // Construct dynamic download link
                   />
                 </motion.div>
@@ -93,28 +82,9 @@ const PriceList = () => {
           <div className="loader">Loading...</div>
         </ContentBlock>
       )}
+      </ContentBlock>
     </Layout>
   );
-};
-
-// Static or Server-side data fetching
-export async function getStaticProps() {
-  // You can add a fallback or fetch the data here if needed
-  // Example static data fetch:
-  // const res = await fetch('http://dhaneshnco.in/api/pricelist');
-  // const priceListData = await res.json();
-
-  return {
-    props: {}, // Pass any required props if needed for static generation
-  };
-}
-
-PriceList.propTypes = {
-  data: PropTypes.object,
-};
-
-PriceList.defaultProps = {
-  data: {},
 };
 
 export default PriceList;

@@ -32,7 +32,7 @@ const AboutUs = ({ data }) => {
       {/* ******** */}
       {/* Lead Blurb */}
       {/* ******** */}
-      <ContentBlock>
+      <ContentBlock className="d-flex align-items-center py-1">
         <ContentText>
           <TextHeader colorHeader={leadColorHeader} mainHeader={leadMainHeader} />
           <TextParagraph
