@@ -14,17 +14,12 @@ import inputData from '../pagesInput/contact';  // Assuming this file still exis
 import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Footer from '../components/Footer';
-import Head from 'next/head';
 
 const ContactPage = ({ className }) => {
   const { openParagraph, contactOptionsArray, faqText } = inputData;
 
   return (
     <Layout className={className} contact>
-      <Head>
-        <title>Contact Details</title>
-        <meta name="description" content="Contact Dhanesh and company to get enquiry and product details." />
-      </Head>
 
       <ContentBlockContactPage className="d-flex align-items-center py-0">
         <ContentText>
