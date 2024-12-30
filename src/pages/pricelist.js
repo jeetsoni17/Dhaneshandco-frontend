@@ -8,6 +8,7 @@ import BlogPostContainer from '../components/BlogPostContainer';
 import TextHeader from '../components/TextHeader';
 import ContentText from '../components/ContentText';
 import Head from 'next/head'; 
+import { CONFIG } from '../../config';
 
 const PriceList = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,7 +18,7 @@ const PriceList = () => {
   useEffect(() => {
     const fetchPriceList = async () => {
       try {
-        const API_URL = 'https://slategray-louse-109965.hostingersite.com/routes/index.php?endpoint=pricelist';
+        const API_URL = `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=pricelist`;
         const response = await fetch(API_URL);
         if (!response.ok) throw new Error(`Failed to fetch price list data. Status: ${response.status}`);
         const data = await response.json();
@@ -62,8 +63,8 @@ const PriceList = () => {
                   <FeaturedBlogPost
                     blogInfo={item}
                     pricelistTitle={item.file_name} // Use the file name as title
-                    image={`https://slategray-louse-109965.hostingersite.com/public/images/pdfs/${item.image_path}` || blogImageArray[0]} // Fallback to first image if none
-                    link={`https://slategray-louse-109965.hostingersite.com/routes/index.php?endpoint=download_pdf&id=${item.id}`} // Construct dynamic download link
+                    image={`${CONFIG.BASE_API_URL}/public/images/pdfs/${item.image_path}` || blogImageArray[0]} // Fallback to first image if none
+                    link={`${CONFIG.BASE_API_URL}/routes/index.php?endpoint=download_pdf&id=${item.id}`} // Construct dynamic download link
                   />
                 </motion.div>
               ))}

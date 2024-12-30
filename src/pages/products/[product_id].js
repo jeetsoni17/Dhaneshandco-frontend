@@ -4,6 +4,7 @@ import Layout from '../../components/Layout';
 import { CircularProgress, Typography, Grid, Button, Container, Box } from '@mui/material';
 import Head from 'next/head';
 import ShareIcon from '@mui/icons-material/Share';
+import { CONFIG } from '../../../config';
 
 const ProductPage = ({ product, error }) => {
   const router = useRouter();
@@ -42,7 +43,7 @@ const ProductPage = ({ product, error }) => {
               }}
             >
               <img
-                src={`https://slategray-louse-109965.hostingersite.com/public/images/product/${product.product_image}`}
+                src={`${CONFIG.BASE_API_URL}/public/images/product/${product.product_image}`}
                 alt={product.product_name}
                 style={{
                   maxWidth: '100%',
@@ -125,7 +126,7 @@ export async function getServerSideProps({ params }) {
 
   try {
     // Fetch product details from the API
-    const response = await fetch(`https://slategray-louse-109965.hostingersite.com/routes/index.php?endpoint=products&id=${product_id}`);
+    const response = await fetch(`${CONFIG.BASE_API_URL}/routes/index.php?endpoint=products&id=${product_id}`);
 
     if (!response.ok) throw new Error('Product not found');
 
