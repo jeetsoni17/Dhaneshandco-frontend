@@ -24,11 +24,11 @@ const Footer = ({ className }) => (
   <div className="col-md-3 d-flex flex-column align-items-center">
     <h5>Quick Links</h5>
     <ul className="list-unstyled text-center" style={{ fontSize: '14px' }}>
-      <li className="mb-2"><a href="#" className="text-dark">Home</a></li>
-      <li className="mb-2"><a href="#" className="text-dark">About Us</a></li>
-      <li className="mb-2"><a href="#" className="text-dark">Pricelist</a></li>
-      <li className="mb-2"><a href="#" className="text-dark">Contact</a></li>
-      <li className="mb-2"><a href="#" className="text-dark">Enquiry</a></li>
+      <li className="mb-2"><a href="/" className="text-dark">Home</a></li>
+      <li className="mb-2"><a href="/about-us" className="text-dark">About Us</a></li>
+      <li className="mb-2"><a href="/pricelist" className="text-dark">Price list</a></li>
+      <li className="mb-2"><a href="/contact-us" className="text-dark">Contact Us</a></li>
+      <li className="mb-2"><a href="/enquiry" className="text-dark">Enquiry</a></li>
     </ul>
   </div>
 </div>

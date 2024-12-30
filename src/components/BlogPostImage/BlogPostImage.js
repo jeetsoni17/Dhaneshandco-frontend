@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 
 const BlogPostImage = ({ className, image, src }) => (
   <img
-    className={[className, "w-75 mb-3 mx-auto"].join(" ")}
+    className={[className, "w-75 my-3 mx-auto"].join(" ")}
     style={{ borderRadius: "0" }}
     src={image} // Make sure this is a valid URL or path
     alt="Descriptive alt text" // Add meaningful alt text

@@ -37,8 +37,8 @@ const ContactPage = ({ className }) => {
         <title>Enquiry</title>
         <meta name="description" content="Submit your enquiry for electrical goods at Dhanesh & Co." />
       </Head>
-      <FormWrapper>
-        <TextHeader mainHeader="Submit Your Enquiry" />
+      <FormWrapper className="py-4">
+        <TextHeader mainHeader="Submit Your Enquiry" className="pb-4"/>
         {successMessage && <Message success>{successMessage}</Message>}
         {errorMessage && <Message error>{errorMessage}</Message>}
 
