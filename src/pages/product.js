@@ -95,10 +95,10 @@ const Products = ({ categories, products, subcategories }) => {
         <meta name="description" content="Browse and download our latest price lists" />
       </Head>
 
-      <Box maxWidth="1200px" mx="auto" py={4}>
-        <TextHeader mainHeader="Available Products" />
+      <Box maxWidth="1200px" mx="auto" py={3}>
+        <TextHeader mainHeader="Available Products"/>
 
-        <Box display="flex" gap={3}>
+        <Box display="flex" gap={3} pt={3}>
           {/* Sidebar */}
           <Sidebar>
             <TextField

@@ -42,19 +42,16 @@ const PriceList = () => {
       </Head>
 
 
-      <ContentBlock className="d-flex align-items-center py-0">
-      <ContentText className="py-0">
-          <TextHeader mainHeader="Price List"/>
-      </ContentText>
-
+    <ContentBlock className="d-flex align-items-center">
+      <TextHeader mainHeader="Price List" />
+    
       {!isLoading ? (
         error ? (
           <ContentBlock>
             <p style={{ color: 'red' }}>Failed to load the price list. Please try again later.</p>
           </ContentBlock>
         ) : priceListData.length > 0 ? (
-          <ContentBlock>
-            <BlogPostContainer xtraWide cards={3}>
+            <BlogPostContainer xtraWide cards={3} className="py-2">
               {priceListData.map((item, index) => (
                 <motion.div
                   key={item.id || index}
@@ -63,15 +60,14 @@ const PriceList = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                 >
                   <FeaturedBlogPost
-                    pricelistTitle={item.file_name} // Use the file name as title
                     blogInfo={item}
+                    pricelistTitle={item.file_name} // Use the file name as title
                     image={`https://slategray-louse-109965.hostingersite.com/public/images/pdfs/${item.image_path}` || blogImageArray[0]} // Fallback to first image if none
-                    link={`https://slategray-louse-109965.hostingersite.com/download.php?id=${item.id}`} // Construct dynamic download link
+                    link={`https://slategray-louse-109965.hostingersite.com/routes/index.php?endpoint=download_pdf&id=${item.id}`} // Construct dynamic download link
                   />
                 </motion.div>
               ))}
             </BlogPostContainer>
-          </ContentBlock>
         ) : (
           <ContentBlock>
             <p>No price list data available at the moment.</p>

@@ -7,7 +7,7 @@ const ContentBlockContactPage = ({ children, className, color, bs }) => {
 
   return (
     <section className={['container-fluid', colorBG, className, bs].join(' ')}>
-      <div className="container py-5">{children}</div>
+      <div className="container py-4">{children}</div>
     </section>
   )
 }
