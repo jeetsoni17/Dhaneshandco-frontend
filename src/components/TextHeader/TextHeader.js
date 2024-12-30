@@ -38,6 +38,7 @@ const TextHeader = ({
     </CustomTag>
   )
 }
+
 const StyledTextHeader = styled(TextHeader)``
 
 export default StyledTextHeader
@@ -56,13 +57,13 @@ TextHeader.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Emotion classname
+   * Alignment of the header text
    */
-  alignHeader: PropTypes.oneOf('center', 'left', 'right', ''),
+  alignHeader: PropTypes.oneOf(['center', 'left', 'right', '']),
   /**
-   * Emotion classname
+   * Set the size of the header. Use 'large', 'medium', 'small', or 'v-small'
    */
-  size: PropTypes.oneOf('large', 'center', 'small', ''),
+  size: PropTypes.oneOf(['large', 'medium', 'small', 'v-small']), // Fixed here
 }
 
 TextHeader.defaultProps = {
