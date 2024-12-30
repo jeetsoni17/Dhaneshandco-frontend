@@ -39,11 +39,7 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout>
-      <Head>
-        <title>Dhanesh and company photo</title>
-        <meta name="description" content="none" />
-      </Head>
-
+      
       {/* Responsive Carousel */}
       <BannerCarousel banners={banners} />
 

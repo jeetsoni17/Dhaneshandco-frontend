@@ -2,7 +2,6 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import { CircularProgress, Typography, Grid, Button, Container, Box } from '@mui/material';
-import Head from 'next/head';
 import ShareIcon from '@mui/icons-material/Share';
 import { CONFIG } from '../../../config';
 
@@ -23,10 +22,6 @@ const ProductPage = ({ product, error }) => {
 
   return (
     <Layout>
-      <Head>
-        <title>{product.product_name}</title>
-        <meta name="description" content={product.product_name} />
-      </Head>
 
       <Container sx={{ mt: 4, maxWidth: '1200px' }}>
         <Grid container spacing={4} justifyContent="center" alignItems="center">

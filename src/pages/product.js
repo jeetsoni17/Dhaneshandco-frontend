@@ -92,10 +92,6 @@ const Products = ({ categories, products, subcategories }) => {
 
   return (
     <Layout>
-      <Head>
-        <title>Products</title>
-        <meta name="description" content="Browse and download our latest price lists" />
-      </Head>
 
       <Box maxWidth="1200px" mx="auto" py={3}>
         <TextHeader mainHeader="Available Products"/>

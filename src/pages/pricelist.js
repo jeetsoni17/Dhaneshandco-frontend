@@ -7,7 +7,6 @@ import FeaturedBlogPost from '../components/FeaturedBlogPost';
 import BlogPostContainer from '../components/BlogPostContainer';
 import TextHeader from '../components/TextHeader';
 import ContentText from '../components/ContentText';
-import Head from 'next/head'; 
 import { CONFIG } from '../../config';
 
 const PriceList = () => {
@@ -37,10 +36,7 @@ const PriceList = () => {
 
   return (
     <Layout>
-      <Head>
-        <title>Price List</title>
-        <meta name="description" content="Browse and download our latest price lists" />
-      </Head>
+     
 
 
     <ContentBlock className="d-flex align-items-center">
