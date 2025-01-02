@@ -245,7 +245,6 @@ export async function getServerSideProps() {
     const subcategoriesResponse = await fetch(
       'https://slategray-louse-109965.hostingersite.com/routes/index.php?endpoint=subcategories'
     );
-
     if (!categoriesResponse.ok || !productsResponse.ok || !subcategoriesResponse.ok) {
       throw new Error('Error fetching data');
     }

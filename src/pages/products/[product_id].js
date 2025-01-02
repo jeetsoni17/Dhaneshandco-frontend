@@ -1,20 +1,63 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
-import { CircularProgress, Typography, Grid, Button, Container, Box } from '@mui/material';
+import {
+  CircularProgress,
+  Typography,
+  Grid,
+  Button,
+  Container,
+  Box,
+  Divider,
+  Paper,
+  IconButton,
+} from '@mui/material';
 import Head from 'next/head';
 import ShareIcon from '@mui/icons-material/Share';
+import ZoomInIcon from '@mui/icons-material/ZoomIn';
 
-const ProductPage = ({ product, error }) => {
+// Define functions to get category and subcategory names
+function getCategoryName(categoryId, categories) {
+  const category = categories.find(item => item.category_id === categoryId);
+  return category ? category.category_name : 'Unknown Category';
+}
+
+function getSubcategoryName(subcategoryId, subcategories) {
+  const subcategory = subcategories.find(item => item.subcategory_id === subcategoryId);
+  return subcategory ? subcategory.subcategory_name : 'Unknown Subcategory';
+}
+
+const ProductPage = ({ product, categories, subcategories, relatedProducts, error }) => {
   const router = useRouter();
 
-  // Show error message if there's an error
-  if (error) return <div>Error: {error}</div>;
+  if (error) {
+    return (
+      <Container
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '50vh',
+          textAlign: 'center',
+        }}
+      >
+        <Typography variant="h6" color="error">
+          {`Error: ${error}`}
+        </Typography>
+      </Container>
+    );
+  }
 
-  // Show a loading spinner if the product is not loaded yet
   if (!product) {
     return (
-      <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
+      <Container
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          minHeight: '50vh',
+        }}
+      >
         <CircularProgress />
       </Container>
     );
@@ -24,97 +67,143 @@ const ProductPage = ({ product, error }) => {
     <Layout>
       <Head>
         <title>{product.product_name}</title>
-        <meta name="description" content={product.product_name} />
+        <meta name="description" content={product.product_description} />
       </Head>
 
-      <Container sx={{ mt: 4, maxWidth: '1200px' }}>
-        <Grid container spacing={4} justifyContent="center" alignItems="center">
-          {/* Product Image */}
-          <Grid item xs={12} sm={5}>
-            <Box
-              sx={{
-                border: '2px solid #f0f0f0',
-                borderRadius: '10px',
-                overflow: 'hidden',
-                textAlign: 'center',
-                padding: 2,
-                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.1)',
-              }}
-            >
-              <img
-                src={`https://slategray-louse-109965.hostingersite.com/public/images/product/${product.product_image}`}
-                alt={product.product_name}
-                style={{
-                  maxWidth: '100%',
-                  height: 'auto',
-                  objectFit: 'contain',
-                  borderRadius: '8px',
+      <Container maxWidth="lg" sx={{ mt: 6, mb: 4 }}>
+        {/* Main Product Section */}
+        <Paper elevation={3} sx={{ p: 4, borderRadius: '16px' }}>
+          <Grid container spacing={4}>
+            {/* Product Image */}
+            <Grid item xs={12} md={6}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  border: '1px solid #e0e0e0',
+                  borderRadius: '12px',
+                  overflow: 'hidden',
+                  position: 'relative',
+                  height: '100%', // Ensures the box takes up the full height of the column
                 }}
-              />
-            </Box>
-          </Grid>
-
-          {/* Product Name and Categories */}
-          <Grid item xs={12} sm={7}>
-            <Box sx={{ padding: 2 }}>
-              <Typography variant="h3" gutterBottom sx={{ fontWeight: 600 }}>
-                {product.product_name}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                sx={{ fontStyle: 'italic', marginBottom: 2, fontSize: '1rem' }}
               >
-                {`${product.category_name}, ${product.subcategory_name}, ${product.sub_subcategory_name}`}
-              </Typography>
-            </Box>
-          </Grid>
+                <img
+                  src={`https://slategray-louse-109965.hostingersite.com/public/images/product/${product.product_image}`}
+                  alt={product.product_name}
+                  style={{
+                    maxWidth: '100%',
+                    height: 'auto',
+                    display: 'block',
+                    objectFit: 'contain', // Ensures the image scales properly without distortion
+                  }}
+                />
+                <IconButton
+                  sx={{
+                    position: 'absolute',
+                    bottom: 10,
+                    right: 10,
+                    backgroundColor: '#fff',
+                    boxShadow: '0 2px 6px rgba(0, 0, 0, 0.2)',
+                  }}
+                >
+                  {/* <ZoomInIcon /> */}
+                </IconButton>
+              </Box>
+            </Grid>
 
-          {/* Product Description */}
-          <Grid item xs={12}>
-            <Box
-              sx={{
-                padding: 3,
-                borderTop: '1px solid #e0e0e0',
-                borderBottom: '1px solid #e0e0e0',
-                marginTop: 3,
-              }}
-            >
-              <Typography variant="h5" gutterBottom sx={{ fontWeight: 500 }}>
-                About This Product
-              </Typography>
-              <Typography variant="body1" sx={{ lineHeight: 1.8, fontSize: '1rem' }}>
-                {product.product_description}
-              </Typography>
-            </Box>
+            {/* Product Details */}
+            <Grid item xs={12} md={6}>
+              <Box>
+                <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 2 }}>
+                  {product.product_name}
+                </Typography>
+                <Typography variant="subtitle1" color="textSecondary" sx={{ mb: 3 }}>
+                  {`${getCategoryName(product.category_id, categories)} > ${getSubcategoryName(product.subcategory_id, subcategories)}`}
+                </Typography>
+                <Divider sx={{ my: 2 }} />
+                <Typography variant="h6" sx={{ mb: 2 }}>
+                  About This Product
+                </Typography>
+                <Box
+                  component="ul"
+                  sx={{
+                    paddingLeft: '20px',
+                    lineHeight: 1.6,
+                    marginBottom: 3,
+                  }}
+                >
+                  {product.product_description
+                    ?.split(';')
+                    .filter((point) => point.trim() !== '')
+                    .map((point, index) => (
+                      <li key={index} style={{ marginBottom: '8px' }}>
+                        {point.trim()}
+                      </li>
+                    ))}
+                </Box>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  startIcon={<ShareIcon />}
+                  onClick={() => {
+                    navigator.share
+                      ? navigator.share({
+                          title: product.product_name,
+                          url: window.location.href,
+                        })
+                      : alert('Sharing not supported on this device.');
+                  }}
+                  sx={{
+                    textTransform: 'none',
+                    borderRadius: '50px',
+                    px: 4,
+                  }}
+                >
+                  Share This Product
+                </Button>
+              </Box>
+            </Grid>
           </Grid>
+        </Paper>
 
-          {/* Share Button */}
-          <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', marginTop: 4 }}>
-            <Button
-              variant="contained"
-              color="primary"
-              startIcon={<ShareIcon />}
-              onClick={() => {
-                navigator.share
-                  ? navigator.share({
-                      title: product.product_name,
-                      url: window.location.href,
-                    })
-                  : alert('Sharing not supported on this device.');
-              }}
-              sx={{
-                padding: '10px 30px',
-                fontSize: '1rem',
-                textTransform: 'none',
-                borderRadius: '50px',
-                boxShadow: '0 4px 10px rgba(0, 0, 0, 0.2)',
-              }}
-            >
-              Share This Product
-            </Button>
+        {/* Related Products Section */}
+        <Box sx={{ mt: 6 }}>
+          <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 4 }}>
+            Related Products
+          </Typography>
+          <Grid container spacing={3}>
+            {relatedProducts.map((relatedProduct) => (
+              <Grid item xs={12} sm={6} md={3} key={relatedProduct.product_id}>
+                <Paper
+                  elevation={2}
+                  sx={{
+                    borderRadius: '12px',
+                    overflow: 'hidden',
+                    transition: '0.3s',
+                    ':hover': { transform: 'scale(1.05)' },
+                  }}
+                >
+                  <img
+                    src={`https://slategray-louse-109965.hostingersite.com/public/images/product/${relatedProduct.product_image}`}
+                    alt={relatedProduct.product_name}
+                    style={{
+                      maxWidth: '100%',
+                      display: 'block',
+                      height: '200px',
+                      objectFit: 'cover',
+                    }}
+                  />
+                  <Box sx={{ p: 2 }}>
+                    <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
+                      {relatedProduct.product_name}
+                    </Typography>
+                  </Box>
+                </Paper>
+              </Grid>
+            ))}
           </Grid>
-        </Grid>
+        </Box>
       </Container>
     </Layout>
   );
@@ -124,19 +213,56 @@ export async function getServerSideProps({ params }) {
   const { product_id } = params;
 
   try {
-    // Fetch product details from the API
-    const response = await fetch(`https://slategray-louse-109965.hostingersite.com/routes/index.php?endpoint=products&id=${product_id}`);
+    // Fetch the product details
+    const productResponse = await fetch(
+      `https://slategray-louse-109965.hostingersite.com/routes/index.php?endpoint=products&id=${product_id}`
+    );
 
-    if (!response.ok) throw new Error('Product not found');
+    if (!productResponse.ok) throw new Error('Product not found');
+    const product = await productResponse.json();
 
-    // Get the product details from the response
-    const product = await response.json();
+    // Fetch categories and subcategories
+    const categoriesResponse = await fetch(
+      'https://slategray-louse-109965.hostingersite.com/routes/index.php?endpoint=categories'
+    );
+    const subcategoriesResponse = await fetch(
+      'https://slategray-louse-109965.hostingersite.com/routes/index.php?endpoint=subcategories'
+    );
 
-    // Return the product details as props
-    return { props: { product } };
+    if (!categoriesResponse.ok || !subcategoriesResponse.ok) {
+      throw new Error('Error fetching data');
+    }
+
+    const categories = await categoriesResponse.json();
+    const subcategories = await subcategoriesResponse.json();
+
+    // Fetch random related products based on subcategory_id
+    const relatedProductsResponse = await fetch(
+      `https://slategray-louse-109965.hostingersite.com/routes/index.php?endpoint=products&subcategory_id=${product.subcategory_id}`
+    );
+    let relatedProducts = await relatedProductsResponse.json();
+
+    // Select only 4 random products
+    relatedProducts = relatedProducts.sort(() => Math.random() - 0.5).slice(0, 4);
+
+    return {
+      props: {
+        product,
+        categories,
+        subcategories,
+        relatedProducts,
+      },
+    };
   } catch (error) {
-    // Return the error message if something goes wrong
-    return { props: { error: error.message } };
+    return {
+      props: {
+        product: null,
+        categories: [],
+        subcategories: [],
+        relatedProducts: [],
+        error: error.message,
+      },
+    };
   }
 }
 
