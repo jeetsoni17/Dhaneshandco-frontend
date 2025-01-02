@@ -171,7 +171,7 @@ const Products = ({ categories, products, subcategories }) => {
             >
               {filteredProducts.map((product) => (
                 <Card
-                onClick={() => router.push(`/products/${product.product_id}`)}
+                onClick={() => router.push(`./products/${product.product_id}`)}
                 sx={{
                   borderRadius: '15px', // Rounded edges
                   boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', // Soft shadow
