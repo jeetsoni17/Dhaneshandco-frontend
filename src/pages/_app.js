@@ -4,7 +4,9 @@ import Head from 'next/head';
 
 function MyApp({ Component, pageProps }) {
   useEffect(() => {
-    // You can add global side-effects here if needed
+    if (typeof window !== "undefined") {
+      import("bootstrap/dist/js/bootstrap.bundle.min.js");
+    }
   }, []);
 
   return (
