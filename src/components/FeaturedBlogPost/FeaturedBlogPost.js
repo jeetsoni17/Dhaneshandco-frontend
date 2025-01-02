@@ -7,10 +7,8 @@ import TextParagraph from '../TextParagraph';
 import Button from '../Button/Button';
 
 // FeaturedPost component to display a blog post with image, title, description, and PDF download button
-const FeaturedPost = ({ blogInfo, pricelistTitle, image, src }) => {
+const FeaturedPost = ({ blogInfo, pricelistTitle, image, link }) => {
   // Extracting data from blogInfo
-  const { title, summary, link } = blogInfo;
-
   // Function to handle PDF download
   const handleDownload = async () => {
     try {
@@ -23,7 +21,7 @@ const FeaturedPost = ({ blogInfo, pricelistTitle, image, src }) => {
       // Create and trigger the temporary download link
       const tempLink = document.createElement('a');
       tempLink.href = url;
-      tempLink.download = `${title || 'file'}.pdf`; // Default filename if title is unavailable
+      tempLink.download = `${blogInfo.file_path}`; 
       tempLink.click();
 
       // Clean up the URL object
@@ -34,24 +32,21 @@ const FeaturedPost = ({ blogInfo, pricelistTitle, image, src }) => {
   };
 
   return (
-    <div className="h-100 border-rounded shadow-sm d-flex flex-wrap px-3 pb-3">
+    <div className="h-100 border-rounded shadow-sm d-flex flex-wrap px-2 pb-3 mx-1">
       <div className="w-100">
         {/* Display the blog image */}
         <div style={{ textAlign: 'center', marginBottom: '10px' }}>
-          <BlogPostImage image={image} src={src} />
+          <BlogPostImage image={image} src={image} />
         </div>
 
         {/* Display the product title below the image */}
         <div style={{ textAlign: 'center', marginTop: '10px' }}>
           <TextHeader
             size="medium"
-            mainHeader={pricelistTitle || title} // Title fallback to blog post title
+            mainHeader={pricelistTitle} // Title fallback to blog post title
             alignHeader="center"
           />
         </div>
-
-        {/* Display the summary of the blog post */}
-        <TextParagraph paragraphs={summary} small />
 
         {/* Button to trigger PDF download */}
         <Button onClick={handleDownload} target="_blank" rel="noopener noreferrer">
@@ -60,21 +55,6 @@ const FeaturedPost = ({ blogInfo, pricelistTitle, image, src }) => {
       </div>
     </div>
   );
-};
-
-// PropTypes validation
-FeaturedPost.propTypes = {
-  blogInfo: PropTypes.object.isRequired, // Object containing blog post data
-  pricelistTitle: PropTypes.string, // Title passed explicitly, fallback for blog title
-  image: PropTypes.string, // Image URL for the blog post
-  src: PropTypes.string, // Source URL for the image
-};
-
-// Default props for the component
-FeaturedPost.defaultProps = {
-  pricelistTitle: 'Untitled Product', // Default title if not provided
-  image: '', // Default value for image URL
-  src: '', // Default value for image source
 };
 
 export default FeaturedPost;

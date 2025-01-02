@@ -4,6 +4,8 @@ import styled from '@emotion/styled';
 import Layout from '../components/Layout';
 import TextHeader from '../components/TextHeader';
 import { useRouter } from 'next/router'; 
+import { CONFIG } from '../../config';
+
 import {
   TextField,
   Accordion,
@@ -90,15 +92,11 @@ const Products = ({ categories, products, subcategories }) => {
 
   return (
     <Layout>
-      <Head>
-        <title>Products</title>
-        <meta name="description" content="Browse and download our latest price lists" />
-      </Head>
 
-      <Box maxWidth="1200px" mx="auto" py={4}>
-        <TextHeader mainHeader="Available Products" />
+      <Box maxWidth="1200px" mx="auto" py={3}>
+        <TextHeader mainHeader="Available Products"/>
 
-        <Box display="flex" gap={3}>
+        <Box display="flex" gap={3} pt={3}>
           {/* Sidebar */}
           <Sidebar>
             <TextField
@@ -187,7 +185,7 @@ const Products = ({ categories, products, subcategories }) => {
                 <CardMedia
                   component="img"
                   height="180" // Adjusted for a more prominent image
-                  image={`https://slategray-louse-109965.hostingersite.com/public/images/product/${product.product_image}`} // Ensure correct image path for production
+                  image={`${CONFIG.BASE_API_URL}/public/images/product/${product.product_image}`} // Ensure correct image path for production
                   alt="Product"
                   sx={{
                     borderTopLeftRadius: '20px', // Rounded corners for the image
@@ -237,13 +235,13 @@ const Products = ({ categories, products, subcategories }) => {
 export async function getServerSideProps() {
   try {
     const categoriesResponse = await fetch(
-      'https://slategray-louse-109965.hostingersite.com/routes/index.php?endpoint=categories'
+      `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=categories`
     );
     const productsResponse = await fetch(
-      'https://slategray-louse-109965.hostingersite.com/routes/index.php?endpoint=products'
+      `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=products`
     );
     const subcategoriesResponse = await fetch(
-      'https://slategray-louse-109965.hostingersite.com/routes/index.php?endpoint=subcategories'
+      `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=subcategories`
     );
     if (!categoriesResponse.ok || !productsResponse.ok || !subcategoriesResponse.ok) {
       throw new Error('Error fetching data');
