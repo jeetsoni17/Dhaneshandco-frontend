@@ -243,7 +243,6 @@ export async function getServerSideProps() {
     const subcategoriesResponse = await fetch(
       `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=subcategories`
     );
-
     if (!categoriesResponse.ok || !productsResponse.ok || !subcategoriesResponse.ok) {
       throw new Error('Error fetching data');
     }
