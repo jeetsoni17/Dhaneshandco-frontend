@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 import { CONFIG } from '../../config';
 
 import {
-  TextField,
   Accordion,
   AccordionSummary,
   AccordionDetails,
@@ -21,7 +20,6 @@ import {
   Alert,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import SearchIcon from '@mui/icons-material/Search';
 import Head from 'next/head';
 
 const Products = ({ categories, products, subcategories }) => {
@@ -96,7 +94,7 @@ const Products = ({ categories, products, subcategories }) => {
           {/* Sidebar */}
           <Sidebar>
             <Accordion expanded>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />} >
                 <Typography variant="h6" fontWeight="bold">
                   Categories
                 </Typography>
@@ -120,7 +118,7 @@ const Products = ({ categories, products, subcategories }) => {
 
             {selectedCategory && (
               <Accordion>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />} >
                   <Typography variant="h6" fontWeight="bold">
                     Subcategories
                   </Typography>
