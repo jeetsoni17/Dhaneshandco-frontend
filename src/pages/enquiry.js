@@ -12,13 +12,13 @@ const ContactPage = ({ className }) => {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
-    emailjs.init('ZZ6ICXjrCVsBkL7FE');
+    emailjs.init('QJHVzYCXCRnbuBywK');
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     emailjs
-      .sendForm('service_6kyxjo4', 'template_sbso5nh', form.current, 'ZZ6ICXjrCVsBkL7FE')
+      .sendForm('service_zpx8yu4', 'template_whnnxp3', form.current, 'QJHVzYCXCRnbuBywK')
       .then(() => {
         setSuccessMessage('Your enquiry has been sent successfully!');
         setErrorMessage('');
