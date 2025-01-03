@@ -6,7 +6,7 @@ import TextHeader from '../components/TextHeader';
 import emailjs from '@emailjs/browser';
 import Button from '../components/Button/Button';
 
-const ContactPage = ({ className }) => {
+const ContactPage = () => {
   const form = useRef();
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
@@ -31,7 +31,7 @@ const ContactPage = ({ className }) => {
   };
 
   return (
-    <Layout className={className}>
+    <Layout>
       <FormWrapper className="py-4">
         <TextHeader mainHeader="Submit Your Enquiry" className="pb-4"/>
         {successMessage && <Message success>{successMessage}</Message>}
@@ -155,7 +155,3 @@ const Message = styled.div`
 `;
 
 export default ContactPage;
-
-ContactPage.propTypes = {
-  className: PropTypes.string,
-};

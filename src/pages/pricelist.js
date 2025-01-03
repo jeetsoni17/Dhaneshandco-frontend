@@ -21,12 +21,12 @@ const PriceList = () => {
 
   const fetchPriceList = async () => {
     try {
-      const API_URL = `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=pricelist`;
-      const response = await fetch(API_URL);
+      const response = await fetch(
+        `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=pricelist`
+      );
       if (!response.ok) throw new Error(`Failed to fetch price list data. Status: ${response.status}`);
       const data = await response.json();
       setPriceListData(data);
-
     } catch (error) {
       console.error('Error fetching price list:', error);
       setError(true);
@@ -41,39 +41,23 @@ const PriceList = () => {
     <ContentBlock className="d-flex align-items-center">
       <TextHeader mainHeader="Price List" />
     
-      {!isLoading ? (
-        error ? (
-          <ContentBlock>
-            <p style={{ color: 'red' }}>Failed to load the price list. Please try again later.</p>
-          </ContentBlock>
-        ) : priceListData.length > 0 ? (
-            <BlogPostContainer xtraWide cards={3} className="py-2">
-              {priceListData.map((item, index) => (
-                <motion.div
-                  key={item.id || index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <FeaturedBlogPost
-                    blogInfo={item}
-                    pricelistTitle={item.file_name} // Use the file name as title
-                    image={`${CONFIG.BASE_API_URL}/public/images/pdfs/${item.image_path}` || blogImageArray[0]} // Fallback to first image if none
-                    link={`${CONFIG.BASE_API_URL}/routes/index.php?endpoint=download_pdf&id=${item.id}`} // Construct dynamic download link
-                  />
-                </motion.div>
-              ))}
-            </BlogPostContainer>
-        ) : (
-          <ContentBlock>
-            <p>No price list data available at the moment.</p>
-          </ContentBlock>
-        )
-      ) : (
-        <ContentBlock>
-          <div className="loader">Loading...</div>
-        </ContentBlock>
-      )}
+      <BlogPostContainer xtraWide cards={3} className="py-2">
+        {priceListData.map((item, index) => (
+          <motion.div
+            key={item.id || index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+          >
+            <FeaturedBlogPost
+              blogInfo={item}
+              pricelistTitle={item.file_name} // Use the file name as title
+              image={`${CONFIG.BASE_API_URL}/public/images/pdfs/${item.image_path}` || blogImageArray[0]} // Fallback to first image if none
+              link={`${CONFIG.BASE_API_URL}/routes/index.php?endpoint=download_pdf&id=${item.id}`} // Construct dynamic download link
+            />
+          </motion.div>
+        ))}
+      </BlogPostContainer>
       </ContentBlock>
     </Layout>
   );
