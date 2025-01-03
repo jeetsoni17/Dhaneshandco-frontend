@@ -19,7 +19,7 @@ import { motion } from 'framer-motion'; // Importing framer-motion
 import Head from 'next/head'; 
 import bannerImage1 from '../images/hero/banner1.jpg';
 import bannerImage2 from '../images/hero/banner2.jpg'; 
-import bannerImage3 from '../images/hero/banner3.jpg'; 
+import bannerImage3 from '../images/hero/banner5.jpg'; 
 import trial1 from '../images/about_us/trial1.png';
 
 const IndexPage = ({ data }) => {

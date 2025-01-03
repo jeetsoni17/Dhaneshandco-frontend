@@ -5,7 +5,8 @@ const inputData = {
     'I can help you unpack your challenge, get clear on where you want to go next and put your plan into action through practical, impactful coaching.',
   ],
   aboutMeParagraphArray: [
-    "Founded with a commitment to excellence and innovation, Dhanesh and Company specializes in delivering high-quality electrical and industrial solutions to meet the evolving needs of our clients. Our comprehensive product line includes essential items such as electrical switchgear, wiring accessories, and advanced automation solutions. We work closely with trusted manufacturers, ensuring each product meets the highest standards of safety and durability. At Dhanesh and Company, our dedication extends beyond products—we strive to provide unmatched technical expertise and customer support. Whether you're looking for reliable components or custom solutions, our team is here to ensure your projects succeed seamlessly..",
+    "Founded with a commitment to excellence and innovation, Dhanesh and Company specializes in delivering high-quality electrical and industrial solutions to meet the evolving needs of our clients. We work closely with trusted manufacturers, ensuring each product meets the highest standards of safety and durability.",
+    " At Dhanesh and Company, our dedication extends beyond products—we strive to provide unmatched technical expertise and customer support. Whether you're looking for reliable components or custom solutions, our team is here to ensure your projects succeed seamlessly..",
   ],
   testimonialText1:
     'Nikki helped me to become aware of certain areas/traits that may have been holding me back and coached me through difficult situations, by suggesting practical and manageable ways to improve or develop those areas.',
