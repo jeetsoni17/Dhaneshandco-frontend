@@ -103,7 +103,7 @@ function Products() {
   };
 
   const currentProducts = filteredProducts?.slice(
-    (currentPage - 1) * productsPerPage,
+    0,
     currentPage * productsPerPage
   );
 
