@@ -10,7 +10,7 @@ import ContentTextImage from "../components/ContentTextImage";
 import inputData from "../pagesInput/about-us";
 import trial1 from '../images/about_us/trial1.png';
 
-const AboutUs = () => {
+function AboutUs() {
   const { 
     leadColorHeader, 
     leadMainHeader, 
