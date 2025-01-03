@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { useRouter } from 'next/router';
 import Layout from '../../components/Layout';
 import {
@@ -15,17 +15,74 @@ import {
 import ShareIcon from '@mui/icons-material/Share';
 import { CONFIG } from '../../../config';
 
-const ProductPage = ({ product, categories, subcategories, relatedProducts, error }) => {
+function ProductPage({ product_id, error }) {
   const router = useRouter();
 
+  const [Product, setProduct] = useState(null);
+  const [categories, setCategories] = useState(null);
+  const [subcategories, setSubCategories] = useState(null);
+  const [relatedProducts, setRelatedProducts] = useState(null);
+
+
+  useEffect(() => {
+    fetchProduct();
+    fetchCategory();
+    // fetchRelatedProducts();
+  }, [router]);
+
+  const fetchProduct = async () => {
+    const productResponse = await fetch(
+      `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=products&id=${product_id}`
+    );
+
+    if (!productResponse.ok) {
+      console.log('Product not found');
+    }
+
+    const response = await productResponse.json();
+    setProduct(response.product);
+    setRelatedProducts(response.relatedProducts);
+  }
+
+  const fetchCategory = async () => {
+    const categoriesResponse = await fetch(
+      `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=categories`
+    );
+    const subcategoriesResponse = await fetch(
+      `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=subcategories`
+    );
+
+    if (!categoriesResponse.ok || !subcategoriesResponse.ok) {
+      throw new Error('Error fetching data');
+    }
+
+    const category = await categoriesResponse.json();
+    const sub_category = await subcategoriesResponse.json();
+
+    setCategories(category);
+    setSubCategories(sub_category);
+  }
+
+  // const fetchRelatedProducts = async () => {
+  //   const relatedProductsResponse = await fetch(
+  //     `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=products&subcategory_id=${Product?.subcategory_id}`
+  //   );
+  //   let related_products = await relatedProductsResponse.json();
+
+  //   // Select only 4 random products
+  //   related_products = related_products.sort(() => Math.random() - 0.5).slice(0, 4);
+
+  //   setRelatedProducts(related_products);
+  // }
+
   const getCategoryName = (categoryId) => {
-    const category = categories.find((cat) => cat.category_id === categoryId);
-    return category ? category.category_name : 'Unknown Category';
+    const category = categories.find((cat) => cat.category_id == categoryId);
+    return category ? category.category_name : "";
   };
   
   const getSubcategoryName = (subcategoryId) => {
-    const subcategory = subcategories.find((sub) => sub.subcategory_id === subcategoryId);
-    return subcategory ? subcategory.subcategory_name : 'Unknown Subcategory';
+    const subcategory = subcategories.find((sub) => sub.subcategory_id == subcategoryId);
+    return subcategory ? (" > " + subcategory.subcategory_name) : "";
   };
 
   if (error) {
@@ -46,26 +103,11 @@ const ProductPage = ({ product, categories, subcategories, relatedProducts, erro
     );
   }
 
-  if (!product) {
-    return (
-      <Container
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          minHeight: '50vh',
-        }}
-      >
-        <CircularProgress />
-      </Container>
-    );
-  }
-
   return (
     <Layout>
       <Container maxWidth="lg" sx={{ mb: 4, pt: 3}}>
         {/* Main Product Section */}
-        <Paper elevation={3} sx={{ p: 4, borderRadius: '16px' }}>
+        { Product && (<Paper elevation={3} sx={{ p: 4, borderRadius: '16px' }}>
           <Grid container spacing={4}>
             {/* Product Image */}
             <Grid item xs={12} md={6}>
@@ -82,8 +124,8 @@ const ProductPage = ({ product, categories, subcategories, relatedProducts, erro
                 }}
               >
                 <img
-                  src={`${CONFIG.BASE_API_URL}/public/images/product/${product.product_image}`}
-                  alt={product.product_name}
+                  src={`${CONFIG.BASE_API_URL}/public/images/product/${Product.product_image}`}
+                  alt={Product.product_name}
                   style={{
                     width: '70%',
                     maxWidth: '100%',
@@ -110,11 +152,12 @@ const ProductPage = ({ product, categories, subcategories, relatedProducts, erro
             <Grid item xs={12} md={6}>
               <Box>
                 <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 2 }}>
-                  {product.product_name}
+                  {Product.product_name}
                 </Typography>
-                <Typography variant="subtitle1" color="textSecondary" sx={{ mb: 3 }}>
-                  {`${getCategoryName(product.category_id)} > ${getSubcategoryName(product.subcategory_id)}`}
-                </Typography>
+                
+                {subcategories && (<Typography variant="subtitle1" color="textSecondary" sx={{ mb: 3 }}>
+                  {`${getCategoryName(Product.category_id)} ${getSubcategoryName(Product.subcategory_id)}`}
+                </Typography>)}
                 <Divider sx={{ my: 2 }} />
                 <Typography variant="h6" sx={{ mb: 2 }}>
                   About This Product
@@ -127,7 +170,7 @@ const ProductPage = ({ product, categories, subcategories, relatedProducts, erro
                     marginBottom: 3,
                   }}
                 >
-                  {product.product_description
+                  {Product.product_description
                     ?.split(';')
                     .filter((point) => point.trim() !== '')
                     .map((point, index) => (
@@ -143,7 +186,7 @@ const ProductPage = ({ product, categories, subcategories, relatedProducts, erro
                   onClick={() => {
                     navigator.share
                       ? navigator.share({
-                          title: product.product_name,
+                          title: Product.product_name,
                           url: window.location.href,
                         })
                       : alert('Sharing not supported on this device.');
@@ -159,10 +202,10 @@ const ProductPage = ({ product, categories, subcategories, relatedProducts, erro
               </Box>
             </Grid>
           </Grid>
-        </Paper>
+        </Paper>)}
 
         {/* Related Products Section */}
-        <Box sx={{ mt: 6 }}>
+        {relatedProducts && (<Box sx={{ mt: 6 }}>
           <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 4 }}>
             Related Products
           </Typography>
@@ -203,7 +246,7 @@ const ProductPage = ({ product, categories, subcategories, relatedProducts, erro
               </Grid>
             ))}
           </Grid>
-        </Box>
+        </Box>)}
       </Container>
     </Layout>
   );
@@ -211,56 +254,16 @@ const ProductPage = ({ product, categories, subcategories, relatedProducts, erro
 
 export async function getServerSideProps({ params }) {
   const { product_id } = params;
-
   try {
-    // Fetch the product details
-    const productResponse = await fetch(
-      `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=products&id=${product_id}`
-    );
-
-    if (!productResponse.ok) throw new Error('Product not found');
-    const product = await productResponse.json();
-
-    // Fetch categories and subcategories
-    const categoriesResponse = await fetch(
-      `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=categories`
-    );
-    const subcategoriesResponse = await fetch(
-      `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=subcategories`
-    );
-
-    if (!categoriesResponse.ok || !subcategoriesResponse.ok) {
-      throw new Error('Error fetching data');
-    }
-
-    const categories = await categoriesResponse.json();
-    const subcategories = await subcategoriesResponse.json();
-
-    // Fetch random related products based on subcategory_id
-    const relatedProductsResponse = await fetch(
-      `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=products&subcategory_id=${product.subcategory_id}`
-    );
-    let relatedProducts = await relatedProductsResponse.json();
-
-    // Select only 4 random products
-    relatedProducts = relatedProducts.sort(() => Math.random() - 0.5).slice(0, 4);
-
     return {
       props: {
-        product,
-        categories,
-        subcategories,
-        relatedProducts,
+        product_id,
       },
     };
   } catch (error) {
     return {
       props: {
-        product: null,
-        categories: [],
-        subcategories: [],
-        relatedProducts: [],
-        error: error.message,
+        product_id: null,
       },
     };
   }
