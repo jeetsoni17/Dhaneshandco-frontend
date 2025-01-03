@@ -19,7 +19,7 @@ const ContactPage = ({ className }) => {
   const { openParagraph, contactOptionsArray, faqText } = inputData;
 
   return (
-    <Layout className={className} contact>
+    <Layout>
 
       <ContentBlockContactPage className="d-flex align-items-center py-0">
         <ContentText>
@@ -91,15 +91,3 @@ const StyledContactPage = styled(ContactPage)`
 `;
 
 export default StyledContactPage;
-
-ContactPage.propTypes = {
-  className: PropTypes.string,
-};
-
-// Static props if needed in the future
-// export async function getStaticProps() {
-//   // Fetch data or provide static data if necessary
-//   return {
-//     props: {},
-//   };
-// }

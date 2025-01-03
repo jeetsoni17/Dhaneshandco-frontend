@@ -24,8 +24,6 @@ function Products() {
   const [filteredProducts, setFilteredProducts] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage] = useState(21);
 
@@ -106,32 +104,6 @@ function Products() {
     0,
     currentPage * productsPerPage
   );
-
-  if (loading) {
-    return (
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        height="100vh"
-      >
-        <CircularProgress />
-      </Box>
-    );
-  }
-
-  if (error) {
-    return (
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        height="100vh"
-      >
-        <Alert severity="error">{error}</Alert>
-      </Box>
-    );
-  }
 
   return (
     <Layout>

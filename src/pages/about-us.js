@@ -10,7 +10,7 @@ import ContentTextImage from "../components/ContentTextImage";
 import inputData from "../pagesInput/about-us";
 import trial1 from '../images/about_us/trial1.png';
 
-const AboutUs = ({ data }) => {
+const AboutUs = () => {
   const { 
     leadColorHeader, 
     leadMainHeader, 
@@ -21,7 +21,7 @@ const AboutUs = ({ data }) => {
 
   const storyArray = [
     {
-      image: data.image1,
+      image: trial1.src,
       title: storyTitle1,
       paragraphs: storyParagraphs1,
     },
@@ -46,7 +46,7 @@ const AboutUs = ({ data }) => {
         {storyArray.map((item, index) => (
           <ContentTextImage
             key={index}
-            image={trial1.src}
+            image={item.image}
             imageSide={index % 2 ? "left" : "right"}
             className="py-0"
           >
@@ -65,19 +65,3 @@ const AboutUs = ({ data }) => {
 
 export default AboutUs;
 
-AboutUs.propTypes = {
-  data: PropTypes.shape({
-    image1: PropTypes.string.isRequired,
-  }),
-};
-
-export async function getStaticProps() {
-  // Replace with your actual image paths
-  const data = {
-    image1: "../images/about_us/trial1.png", // Ensure this is the correct public path
-  };
-
-  return {
-    props: { data },
-  };
-}
