@@ -22,10 +22,7 @@ import bannerImage2 from '../images/hero/banner2.jpg';
 import bannerImage3 from '../images/hero/banner5.jpg'; 
 import trial1 from '../images/about_us/trial1.png';
 
-const IndexPage = ({ data }) => {
-  // Define Images
-  const profileImage = data.profilePic; // Direct use in Next.js
-
+const IndexPage = ({}) => {
   const { aboutMeParagraphArray, blogSectionTitle } = inputData;
   const { productArray } = ProductInputData;
 
@@ -86,23 +83,5 @@ const IndexPage = ({ data }) => {
   );
 };
 
-export async function getStaticProps() {
-  // Example: You can fetch data here using a CMS or local files
-  const data = {
-    profilePic: trial1, // Replace with your actual image path
-  };
-
-  return {
-    props: { data },
-  };
-}
-
-IndexPage.propTypes = {
-  data: PropTypes.object,
-};
-
-IndexPage.defaultProps = {
-  data: {},
-};
 
 export default IndexPage;

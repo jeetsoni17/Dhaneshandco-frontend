@@ -90,14 +90,3 @@ const StyledFooter = styled(Footer)`
 `
 
 export default StyledFooter
-
-Footer.propTypes = {
-  /**
-   * Emotion classname
-   */
-  className: PropTypes.string,
-}
-
-Footer.defaultProps = {
-  className: '',
-}

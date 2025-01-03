@@ -138,12 +138,3 @@ const StyledNavBar = styled(NavBar)`
 `;
 
 export default StyledNavBar;
-
-NavBar.propTypes = {
-  /**
-   * Emotion classname
-   */
-  className: PropTypes.string,
-};
-
-NavBar.defaultProps = {};
