@@ -21,7 +21,7 @@ const NavBar = ({ className }) => (
             layout="intrinsic"
             className="me-2"
           />{" "}
-          Dhanesh and Company
+          Dhanesh & Co
         </Link>
         <button
           className="navbar-toggler"
@@ -104,7 +104,7 @@ const StyledNavBar = styled(NavBar)`
     padding: 10px 20px; /* Padding for button */
     border-radius: 35px; /* Rounded corners */
     transition: background-color 0.3s ease;
-    margin-left: auto; /* Push the button to the right corner */
+    margin-left: centre; /* Push the button to the right corner */
     text-decoration: none; /* Remove underline from the link */
 
     &:hover {
