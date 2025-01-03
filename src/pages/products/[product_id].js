@@ -19,15 +19,14 @@ function ProductPage({ product_id, error }) {
   const router = useRouter();
 
   const [Product, setProduct] = useState(null);
-  const [categories, setCategories] = useState(null);
-  const [subcategories, setSubCategories] = useState(null);
-  const [relatedProducts, setRelatedProducts] = useState(null);
+  const [Categories, setCategories] = useState(null);
+  const [SubCategories, setSubCategories] = useState(null);
+  const [RelatedProducts, setRelatedProducts] = useState(null);
 
 
   useEffect(() => {
     fetchProduct();
     fetchCategory();
-    // fetchRelatedProducts();
   }, [router]);
 
   const fetchProduct = async () => {
@@ -63,25 +62,13 @@ function ProductPage({ product_id, error }) {
     setSubCategories(sub_category);
   }
 
-  // const fetchRelatedProducts = async () => {
-  //   const relatedProductsResponse = await fetch(
-  //     `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=products&subcategory_id=${Product?.subcategory_id}`
-  //   );
-  //   let related_products = await relatedProductsResponse.json();
-
-  //   // Select only 4 random products
-  //   related_products = related_products.sort(() => Math.random() - 0.5).slice(0, 4);
-
-  //   setRelatedProducts(related_products);
-  // }
-
   const getCategoryName = (categoryId) => {
-    const category = categories.find((cat) => cat.category_id == categoryId);
+    const category = Categories.find((cat) => cat.category_id == categoryId);
     return category ? category.category_name : "";
   };
   
   const getSubcategoryName = (subcategoryId) => {
-    const subcategory = subcategories.find((sub) => sub.subcategory_id == subcategoryId);
+    const subcategory = SubCategories.find((sub) => sub.subcategory_id == subcategoryId);
     return subcategory ? (" > " + subcategory.subcategory_name) : "";
   };
 
@@ -155,7 +142,7 @@ function ProductPage({ product_id, error }) {
                   {Product.product_name}
                 </Typography>
                 
-                {subcategories && (<Typography variant="subtitle1" color="textSecondary" sx={{ mb: 3 }}>
+                {SubCategories && (<Typography variant="subtitle1" color="textSecondary" sx={{ mb: 3 }}>
                   {`${getCategoryName(Product.category_id)} ${getSubcategoryName(Product.subcategory_id)}`}
                 </Typography>)}
                 <Divider sx={{ my: 2 }} />
@@ -205,12 +192,12 @@ function ProductPage({ product_id, error }) {
         </Paper>)}
 
         {/* Related Products Section */}
-        {relatedProducts && (<Box sx={{ mt: 6 }}>
+        {RelatedProducts && (<Box sx={{ mt: 6 }}>
           <Typography variant="h5" sx={{ fontWeight: 'bold', mb: 4 }}>
             Related Products
           </Typography>
           <Grid container spacing={3}>
-            {relatedProducts.map((relatedProduct) => (
+            {RelatedProducts.map((relatedProduct) => (
               <Grid item xs={12} sm={6} md={3} key={relatedProduct.product_id}>
                 <Paper
                   elevation={2}
