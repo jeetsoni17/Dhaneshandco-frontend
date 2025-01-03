@@ -30,6 +30,8 @@ const Products = ({ categories, products, subcategories }) => {
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(20); // Limit products per page
   const router = useRouter();
 
   // Memoizing category and subcategory names to avoid recalculating on every render
@@ -53,6 +55,7 @@ const Products = ({ categories, products, subcategories }) => {
     setSelectedCategory(category_id);
     setFilteredProducts(products.filter((product) => product.category_id === category_id));
     setSelectedSubcategory(null);
+    setCurrentPage(1);  // Reset to page 1
   }, [products]);
 
   const handleSubcategorySelect = useCallback((subcategory_id) => {
@@ -62,20 +65,11 @@ const Products = ({ categories, products, subcategories }) => {
         (product) => product.subcategory_id === subcategory_id && product.category_id === selectedCategory
       )
     );
+    setCurrentPage(1);  // Reset to page 1
   }, [products, selectedCategory]);
 
-  // Comment section restored:
-  // The following lines were commented previously to improve performance
-  // const handleSearch = (event) => {
-  //   const searchTerm = event.target.value.toLowerCase();
-  //   setFilteredProducts(
-  //     products.filter(
-  //       (product) =>
-  //         product.product_name.toLowerCase().includes(searchTerm) ||
-  //         product.description.toLowerCase().includes(searchTerm)
-  //     )
-  //   );
-  // };
+  // Pagination logic
+  const currentProducts = filteredProducts.slice(0, currentPage * productsPerPage);
 
   if (loading) {
     return (
@@ -154,13 +148,10 @@ const Products = ({ categories, products, subcategories }) => {
 
           {/* Product Section */}
           <ProductSection>
-            <Box
-              display="grid"
-              gridTemplateColumns="repeat(auto-fill, minmax(250px, 1fr))"
-              gap={3}
-            >
-              {filteredProducts.map((product) => (
+            <Box display="grid" gridTemplateColumns="repeat(auto-fill, minmax(250px, 1fr))" gap={3}>
+              {currentProducts.map((product) => (
                 <Card
+                  key={product.product_id}
                   onClick={() => router.push(`./products/${product.product_id}`)}
                   sx={{
                     borderRadius: '15px',
@@ -177,6 +168,7 @@ const Products = ({ categories, products, subcategories }) => {
                     height="180"
                     image={`${CONFIG.BASE_API_URL}/public/images/product/${product.product_image}`}
                     alt="Product"
+                    loading="lazy" // Lazy load images
                     sx={{
                       borderTopLeftRadius: '20px',
                       borderTopRightRadius: '20px',
@@ -207,6 +199,15 @@ const Products = ({ categories, products, subcategories }) => {
                 </Card>
               ))}
             </Box>
+
+            {/* Load More Button */}
+            {currentProducts.length < filteredProducts.length && (
+              <Box display="flex" justifyContent="center" pt={2}>
+                <Button onClick={() => setCurrentPage((prevPage) => prevPage + 1)} variant="contained">
+                  Load More
+                </Button>
+              </Box>
+            )}
           </ProductSection>
         </Box>
       </Box>
