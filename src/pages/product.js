@@ -26,7 +26,7 @@ import Head from 'next/head';
 
 const Products = ({ categories, products, subcategories }) => {
   const [filteredProducts, setFilteredProducts] = useState(products);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(''); 
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -48,21 +48,27 @@ const Products = ({ categories, products, subcategories }) => {
     );
   };
 
+  // Commented out search-related functionality
+  /*
   const handleSearch = async () => {
-    if (!searchTerm) return;
+    if (!searchTerm) {
+      setFilteredProducts(products); // If search term is empty, reset the filtered products
+      return;
+    }
     try {
       setLoading(true);
-      const response = await fetch(`http://100.115.154.61:5000/api/products?search=${searchTerm}`);
+      const response = await fetch(`${CONFIG.BASE_API_URL}/routes/index.php?endpoint=products&search=${searchTerm}`);
       if (!response.ok) throw new Error('Error fetching search results');
 
       const searchResults = await response.json();
-      setFilteredProducts(searchResults);
+      setFilteredProducts(searchResults); // Update filtered products with the search result
     } catch (error) {
-      setError(error.message);
+      setError(error.message); // Handle error fetching data
     } finally {
-      setLoading(false);
+      setLoading(false); // Hide loading spinner
     }
   };
+  */
 
   const getCategoryName = (categoryId) => {
     const category = categories.find((cat) => cat.category_id === categoryId);
@@ -92,26 +98,28 @@ const Products = ({ categories, products, subcategories }) => {
 
   return (
     <Layout>
-
       <Box maxWidth="1200px" mx="auto" py={3}>
         <TextHeader mainHeader="Available Products"/>
 
-        <Box display="flex" gap={3} pt={3}>
+        <Box display="flex" flexDirection={{ xs: 'column', sm: 'row' }} gap={3} pt={3}>
           {/* Sidebar */}
           <Sidebar>
+            {/* Commented out search input field */}
+            {/* 
             <TextField
               variant="outlined"
               fullWidth
               placeholder="Search products..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
+              onKeyDown={(e) => e.key === 'Enter' && handleSearch()} // Trigger search on Enter key press
               InputProps={{
                 endAdornment: <SearchIcon style={{ cursor: 'pointer' }} onClick={handleSearch} />,
               }}
-            />
+            /> 
+            */}
 
-            <Accordion>
+            <Accordion expanded>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography variant="h6" fontWeight="bold">
                   Categories
@@ -166,64 +174,56 @@ const Products = ({ categories, products, subcategories }) => {
           <ProductSection>
             <Box
               display="grid"
-              gridTemplateColumns="repeat(auto-fit, minmax(250px, 1fr))"
+              gridTemplateColumns="repeat(auto-fill, minmax(250px, 1fr))"
               gap={3}
             >
               {filteredProducts.map((product) => (
                 <Card
-                onClick={() => router.push(`./products/${product.product_id}`)}
-                sx={{
-                  borderRadius: '15px', // Rounded edges
-                  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', // Soft shadow
-                  transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out', // Smooth hover effects
-                  '&:hover': {
-                    transform: 'scale(1.05)', // Slightly enlarge on hover
-                    boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.2)', // Deeper shadow on hover
-                  },
-                }}
-              >
-                <CardMedia
-                  component="img"
-                  height="180" // Adjusted for a more prominent image
-                  image={`${CONFIG.BASE_API_URL}/public/images/product/${product.product_image}`} // Ensure correct image path for production
-                  alt="Product"
+                  onClick={() => router.push(`./products/${product.product_id}`)}
                   sx={{
-                    borderTopLeftRadius: '20px', // Rounded corners for the image
-                    borderTopRightRadius: '20px',
-                    width: '46%', // Set the width to be smaller than the card
-                    height: 'auto', // Maintain aspect ratio
-                    margin: '10px auto', // Center the image within the card
-                  }}
-                />
-                <CardContent
-                  sx={{
-                    padding: '20px', // Adjust padding for better spacing
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    borderRadius: '15px',
+                    boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+                    transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
+                    '&:hover': {
+                      transform: 'scale(1.05)',
+                      boxShadow: '0px 8px 20px rgba(0, 0, 0, 0.2)',
+                    },
                   }}
                 >
-                  <Typography
-                    variant="h6"
+                  <CardMedia
+                    component="img"
+                    height="180"
+                    image={`${CONFIG.BASE_API_URL}/public/images/product/${product.product_image}`}
+                    alt="Product"
                     sx={{
-                      fontWeight: 'bold',
-                      textAlign: 'center',
-                      marginBottom: '8px',
+                      borderTopLeftRadius: '20px',
+                      borderTopRightRadius: '20px',
+                      width: '46%',
+                      height: 'auto',
+                      margin: '10px auto',
+                    }}
+                  />
+                  <CardContent
+                    sx={{
+                      padding: '20px',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      justifyContent: 'center',
                     }}
                   >
-                    {product.product_name}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'center' }}>
-                    {getCategoryName(product.category_id)}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'center' }}>
-                    {getSubcategoryName(product.subcategory_id)}
-                  </Typography>
-                </CardContent>
-              </Card>
-              
-              ))}  
+                    <Typography variant="h6" sx={{ fontWeight: 'bold', textAlign: 'center', marginBottom: '8px' }}>
+                      {product.product_name}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'center' }}>
+                      {getCategoryName(product.category_id)}
+                    </Typography>
+                    <Typography variant="body2" color="textSecondary" sx={{ textAlign: 'center' }}>
+                      {getSubcategoryName(product.subcategory_id)}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              ))}
             </Box>
           </ProductSection>
         </Box>
@@ -274,6 +274,11 @@ const Sidebar = styled(Box)`
   flex: 1;
   padding-right: 1rem;
   border-right: 1px solid #ddd;
+
+  @media (max-width: 768px) {
+    order: -1; /* Move to the top */
+    margin-bottom: 20px;
+  }
 `;
 
 const ProductSection = styled(Box)`
