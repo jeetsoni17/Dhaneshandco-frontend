@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Layout from '../components/Layout';
@@ -26,59 +26,56 @@ import Head from 'next/head';
 
 const Products = ({ categories, products, subcategories }) => {
   const [filteredProducts, setFilteredProducts] = useState(products);
-  const [searchTerm, setSearchTerm] = useState(''); 
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedSubcategory, setSelectedSubcategory] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const router = useRouter();
 
-  const handleCategorySelect = (category_id) => {
+  // Memoizing category and subcategory names to avoid recalculating on every render
+  const getCategoryName = useCallback(
+    (categoryId) => {
+      const category = categories.find((cat) => cat.category_id === categoryId);
+      return category ? category.category_name : 'Unknown Category';
+    },
+    [categories]
+  );
+
+  const getSubcategoryName = useCallback(
+    (subcategoryId) => {
+      const subcategory = subcategories.find((sub) => sub.subcategory_id === subcategoryId);
+      return subcategory ? subcategory.subcategory_name : 'Unknown Subcategory';
+    },
+    [subcategories]
+  );
+
+  const handleCategorySelect = useCallback((category_id) => {
     setSelectedCategory(category_id);
     setFilteredProducts(products.filter((product) => product.category_id === category_id));
     setSelectedSubcategory(null);
-  };
+  }, [products]);
 
-  const handleSubcategorySelect = (subcategory_id) => {
+  const handleSubcategorySelect = useCallback((subcategory_id) => {
     setSelectedSubcategory(subcategory_id);
     setFilteredProducts(
       products.filter(
         (product) => product.subcategory_id === subcategory_id && product.category_id === selectedCategory
       )
     );
-  };
+  }, [products, selectedCategory]);
 
-  // Commented out search-related functionality
-  /*
-  const handleSearch = async () => {
-    if (!searchTerm) {
-      setFilteredProducts(products); // If search term is empty, reset the filtered products
-      return;
-    }
-    try {
-      setLoading(true);
-      const response = await fetch(`${CONFIG.BASE_API_URL}/routes/index.php?endpoint=products&search=${searchTerm}`);
-      if (!response.ok) throw new Error('Error fetching search results');
-
-      const searchResults = await response.json();
-      setFilteredProducts(searchResults); // Update filtered products with the search result
-    } catch (error) {
-      setError(error.message); // Handle error fetching data
-    } finally {
-      setLoading(false); // Hide loading spinner
-    }
-  };
-  */
-
-  const getCategoryName = (categoryId) => {
-    const category = categories.find((cat) => cat.category_id === categoryId);
-    return category ? category.category_name : 'Unknown Category';
-  };
-
-  const getSubcategoryName = (subcategoryId) => {
-    const subcategory = subcategories.find((sub) => sub.subcategory_id === subcategoryId);
-    return subcategory ? subcategory.subcategory_name : 'Unknown Subcategory';
-  };
+  // Comment section restored:
+  // The following lines were commented previously to improve performance
+  // const handleSearch = (event) => {
+  //   const searchTerm = event.target.value.toLowerCase();
+  //   setFilteredProducts(
+  //     products.filter(
+  //       (product) =>
+  //         product.product_name.toLowerCase().includes(searchTerm) ||
+  //         product.description.toLowerCase().includes(searchTerm)
+  //     )
+  //   );
+  // };
 
   if (loading) {
     return (
@@ -104,21 +101,6 @@ const Products = ({ categories, products, subcategories }) => {
         <Box display="flex" flexDirection={{ xs: 'column', sm: 'row' }} gap={3} pt={3}>
           {/* Sidebar */}
           <Sidebar>
-            {/* Commented out search input field */}
-            {/* 
-            <TextField
-              variant="outlined"
-              fullWidth
-              placeholder="Search products..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSearch()} // Trigger search on Enter key press
-              InputProps={{
-                endAdornment: <SearchIcon style={{ cursor: 'pointer' }} onClick={handleSearch} />,
-              }}
-            /> 
-            */}
-
             <Accordion expanded>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 <Typography variant="h6" fontWeight="bold">
