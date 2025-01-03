@@ -15,29 +15,28 @@ const PriceList = () => {
   const [error, setError] = useState(false); // Track errors
 
   useEffect(() => {
-    const fetchPriceList = async () => {
-      try {
-        const API_URL = `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=pricelist`;
-        const response = await fetch(API_URL);
-        if (!response.ok) throw new Error(`Failed to fetch price list data. Status: ${response.status}`);
-        const data = await response.json();
-        setPriceListData(data);
-
-      } catch (error) {
-        console.error('Error fetching price list:', error);
-        setError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
 
     fetchPriceList();
   }, []);
 
+  const fetchPriceList = async () => {
+    try {
+      const API_URL = `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=pricelist`;
+      const response = await fetch(API_URL);
+      if (!response.ok) throw new Error(`Failed to fetch price list data. Status: ${response.status}`);
+      const data = await response.json();
+      setPriceListData(data);
+
+    } catch (error) {
+      console.error('Error fetching price list:', error);
+      setError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <Layout>
-     
-
 
     <ContentBlock className="d-flex align-items-center">
       <TextHeader mainHeader="Price List" />
