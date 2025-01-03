@@ -33,7 +33,7 @@ const ProductPage = ({
     const subcategory = subcategories.find(
       (sub) => +sub.subcategory_id === +subcategoryId
     );
-    return subcategory ? ("> " + subcategory.subcategory_name) : "";
+    return subcategory ? subcategory.subcategory_name : "";
   };
 
   if (error) {
@@ -71,7 +71,7 @@ const ProductPage = ({
 
   return (
     <Layout>
-      <Container maxWidth="lg" sx={{ mt: 6, mb: 4, pt: 3}}>
+      <Container maxWidth="lg" sx={{ mt: 6, mb: 4, pt: 3 }}>
         {/* Main Product Section */}
         <Paper elevation={3} sx={{ p: 4, borderRadius: "16px" }}>
           <Grid container spacing={4}>
@@ -86,30 +86,19 @@ const ProductPage = ({
                   borderRadius: "12px",
                   overflow: "hidden",
                   position: "relative",
-                  height: "100%", // Ensures the box takes up the full height of the column
+                  height: "100%",
                 }}
               >
                 <img
-                  src={ `${CONFIG.BASE_API_URL}/public/images/product/${product.product_image}`}
+                  src={`${CONFIG.BASE_API_URL}/public/images/product/${product.product_image}`}
                   alt={product.product_name}
                   style={{
                     maxWidth: "100%",
                     height: "auto",
                     display: "block",
-                    objectFit: "contain", // Ensures the image scales properly without distortion
+                    objectFit: "contain",
                   }}
                 />
-                <IconButton
-                  sx={{
-                    position: "absolute",
-                    bottom: 10,
-                    right: 10,
-                    backgroundColor: "#fff",
-                    boxShadow: "0 2px 6px rgba(0, 0, 0, 0.2)",
-                  }}
-                >
-                  {/* <ZoomInIcon /> */}
-                </IconButton>
               </Box>
             </Grid>
 
@@ -124,7 +113,9 @@ const ProductPage = ({
                   color="textSecondary"
                   sx={{ mb: 3 }}
                 >
-                  {`${getCategoryName(product.category_id)} ${getSubcategoryName(product.subcategory_id)}`}
+                  {`${getCategoryName(product.category_id)} > ${getSubcategoryName(
+                    product.subcategory_id
+                  )}`}
                 </Typography>
                 <Divider sx={{ my: 2 }} />
                 <Typography variant="h6" sx={{ mb: 2 }}>
@@ -187,6 +178,10 @@ const ProductPage = ({
                     overflow: "hidden",
                     transition: "0.3s",
                     ":hover": { transform: "scale(1.05)" },
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    flexDirection: "column",
                   }}
                 >
                   <img
@@ -194,14 +189,22 @@ const ProductPage = ({
                     alt={relatedProduct.product_name}
                     style={{
                       maxWidth: "100%",
-                      display: "block",
-                      height: "200px",
+                      height: "145px",
                       objectFit: "cover",
                     }}
                   />
-                  <Box sx={{ p: 2 }}>
+                  <Box sx={{ p: 2, textAlign: "center" }}>
                     <Typography variant="subtitle1" sx={{ fontWeight: "bold" }}>
                       {relatedProduct.product_name}
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      color="textSecondary"
+                      sx={{ display: "block", mt: 1 }}
+                    >
+                      {/* Category and Subcategory in separate lines for related product */}
+                      <div>{getCategoryName(relatedProduct.category_id)}</div>
+                      <div>{getSubcategoryName(relatedProduct.subcategory_id)}</div>
                     </Typography>
                   </Box>
                 </Paper>
@@ -209,6 +212,7 @@ const ProductPage = ({
             ))}
           </Grid>
         </Box>
+
       </Container>
     </Layout>
   );
@@ -240,7 +244,7 @@ export async function getServerSideProps({ params }) {
     const categories = await categoriesResponse.json();
     const subcategories = await subcategoriesResponse.json();
 
-    // Fetch random related products based on subcategory_id
+    // Fetch related products based on subcategory_id
     const relatedProductsResponse = await fetch(
       `${CONFIG.BASE_API_URL}/routes/index.php?endpoint=products&subcategory_id=${product.subcategory_id}`
     );
