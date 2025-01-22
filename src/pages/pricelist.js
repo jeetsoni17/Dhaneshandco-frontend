@@ -9,7 +9,7 @@ import TextHeader from '../components/TextHeader';
 import ContentText from '../components/ContentText';
 import { CONFIG } from '../../config';
 
-const PriceList = () => {
+function PriceList () {
   const [isLoading, setIsLoading] = useState(true);
   const [priceListData, setPriceListData] = useState([]);
   const [error, setError] = useState(false); // Track errors

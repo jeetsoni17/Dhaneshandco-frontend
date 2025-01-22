@@ -18,7 +18,6 @@ const NavBar = ({ className }) => (
             src={logo}
             alt="Logo"
             height={30}
-            layout="intrinsic"
             className="me-2"
           />{" "}
           Dhanesh & Co

@@ -268,31 +268,6 @@ function Products() {
   );
 }
 
-export async function getServerSideProps() {
-  const [categoriesResponse, productsResponse, subcategoriesResponse] =
-    await Promise.all([
-      fetch(`${CONFIG.BASE_API_URL}/routes/index.php?endpoint=categories`),
-      fetch(`${CONFIG.BASE_API_URL}/routes/index.php?endpoint=products`),
-      fetch(`${CONFIG.BASE_API_URL}/routes/index.php?endpoint=subcategories`),
-    ]);
-
-  const categories = categoriesResponse.ok
-    ? await categoriesResponse.json()
-    : [];
-  const products = productsResponse.ok ? await productsResponse.json() : [];
-  const subcategories = subcategoriesResponse.ok
-    ? await subcategoriesResponse.json()
-    : [];
-
-  return {
-    props: {
-      categories,
-      products,
-      subcategories,
-    },
-  };
-}
-
 const Sidebar = styled(Box)`
   flex: 1;
   padding-right: 1rem;
