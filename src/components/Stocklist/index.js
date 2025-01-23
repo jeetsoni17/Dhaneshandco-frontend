@@ -31,9 +31,7 @@ const Stocklist = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <a href="https://link1.com" target="_blank" rel="noopener noreferrer">
             <img src={stockImage1.src} alt="Stock Image 1" style={{ width: '100%', height: 'auto' }} />
-          </a>
         </motion.div>
         
         <motion.div
@@ -42,9 +40,8 @@ const Stocklist = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.2 }} // Added delay for stagger effect
         >
-          <a href="https://link2.com" target="_blank" rel="noopener noreferrer">
+          
             <img src={stockImage2.src} alt="Stock Image 2" style={{ width: '100%', height: 'auto' }} />
-          </a>
         </motion.div>
 
         <motion.div
@@ -53,9 +50,7 @@ const Stocklist = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.4 }} // Added delay for stagger effect
         >
-          <a href="https://link3.com" target="_blank" rel="noopener noreferrer">
             <img src={stockImage3.src} alt="Stock Image 3" style={{ width: '100%', height: 'auto' }} />
-          </a>
         </motion.div>
 
         {/* You can follow the same pattern for the rest of the images if needed */}
