@@ -49,13 +49,15 @@ const ContentTextImage = ({
   );
 };
 
-// Add circular image styling here
+// Styled Component with responsive updates
 const StyledContentTextImage = styled(ContentTextImage)`
   .image-wrapper {
-    width: 500px; /* Set the width of the circle */
-    height: 450px; /* Set the height of the circle */
+    /* Updated: Made dimensions responsive */
+    width: 100%; /* Let the width be relative to the container */
+    max-width: 500px; /* Set a max width for the circle */
+    aspect-ratio: 1 / 1; /* Ensure it maintains a perfect circle */
     border-radius: 50%; /* Make it circular */
-    overflow: hidden; /* Ensure anything outside the circle is clipped */
+    overflow: hidden; /* Clip anything outside the circle */
     display: flex; /* Center the image inside */
     align-items: center; /* Center vertically */
     justify-content: center; /* Center horizontally */
@@ -63,12 +65,25 @@ const StyledContentTextImage = styled(ContentTextImage)`
   }
 
   .circular-image {
+    /* Updated: Ensure the image scales properly */
     width: 100%; /* Fill the wrapper's width */
     height: 100%; /* Fill the wrapper's height */
     object-fit: cover; /* Scale the image to cover the area */
     border-radius: 50%; /* Ensure the image is also circular */
-    transform: scale(0.9)
+  }
+
+  /* Added: Media Queries for responsiveness */
+  @media (max-width: 768px) {
+    .image-wrapper {
+      max-width: 300px; /* Adjust the size for smaller screens */
     }
+  }
+
+  @media (max-width: 576px) {
+    .image-wrapper {
+      max-width: 200px; /* Further adjust for extra small screens */
+    }
+  }
 `;
 
 export default StyledContentTextImage;
