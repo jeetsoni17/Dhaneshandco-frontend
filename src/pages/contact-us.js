@@ -46,7 +46,7 @@ const ContactPage = ({ className }) => {
         </ContentText>
       </ContentBlockContactPage>
 
-      <Footer />
+      {/* <Footer /> */}
     </Layout>
   );
 };
